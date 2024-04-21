@@ -14,7 +14,7 @@ CustomButton.propTypes = {
 PropTypes.defaultProps = {
     type: 'button',
     variant: 'contained',
-    sx: {},
+    sx: { mt: 1, mb: 1 },
     style: {},
 };
 

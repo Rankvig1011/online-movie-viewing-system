@@ -14,8 +14,8 @@ import Paper from '@mui/material/Paper';
 import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../../index.css';
+import GoogleIcon from '@mui/icons-material/Google';
 // import TextField from '@mui/material/TextField';
-
 export const Register = () => {
     const formValid = useRef({
         name: false,
@@ -44,8 +44,8 @@ export const Register = () => {
                 <GridMui
                     container
                     sx={{
-                        width: '80%',
-                        height: '80%',
+                        width: '1300px',
+                        height: '600px',
                     }}
                 >
                     <CssBaseline />
@@ -59,8 +59,8 @@ export const Register = () => {
                             backgroundRepeat: 'no-repeat',
                             backgroundSize: 'cover',
                             backgroundPosition: 'center',
-                            borderRadius: '50px 0px 0px 50px',
                         }}
+                        component={Paper}
                     />
                     <GridMui
                         item
@@ -69,9 +69,8 @@ export const Register = () => {
                         md={5}
                         component={Paper}
                         elevation={6}
-                        square
+                        //square
                         sx={{
-                            borderRadius: '0px 50px 50px 0px',
                             backgroundColor: 'rgba(255, 255, 255, 0.8)',
                         }}
                     >
@@ -120,37 +119,54 @@ export const Register = () => {
                                     onChange={(isValid) => (formValid.current.email = isValid)}
                                     autoFocus
                                 />
-                                <CustomTextField
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    name="password"
-                                    label="Mật khẩu"
-                                    type="password"
-                                    id="password"
-                                    onChange={(isValid) => (formValid.current.password = isValid)}
-                                    autoComplete="current-password"
-                                />
-                                <CustomTextField
-                                    margin="normal"
-                                    required
-                                    fullWidth
-                                    name="confirmPassword"
-                                    label="Xác nhận Mật khẩu"
-                                    type="password"
-                                    id="confirmPassword"
-                                    onChange={(isValid) =>
-                                        (formValid.current.confirmPassword = isValid)
-                                    }
-                                    autoComplete="current-password"
-                                />
+                                <GridMui container spacing={2}>
+                                    <GridMui item xs={6}>
+                                        <CustomTextField
+                                            margin="normal"
+                                            required
+                                            fullWidth
+                                            name="password"
+                                            label="Mật khẩu"
+                                            type="password"
+                                            id="password"
+                                            onChange={(isValid) =>
+                                                (formValid.current.password = isValid)
+                                            }
+                                            autoComplete="current-password"
+                                        />
+                                    </GridMui>
+                                    <GridMui item xs={6}>
+                                        <CustomTextField
+                                            margin="normal"
+                                            required
+                                            fullWidth
+                                            name="confirmPassword"
+                                            label="Xác nhận Mật khẩu"
+                                            type="password"
+                                            id="confirmPassword"
+                                            onChange={(isValid) =>
+                                                (formValid.current.confirmPassword = isValid)
+                                            }
+                                            autoComplete="current-password"
+                                        />
+                                    </GridMui>
+                                </GridMui>
+
                                 <CustomButton
                                     type="submit"
                                     fullWidth
                                     variant="contained"
-                                    sx={{ mt: 3, mb: 2 }}
+                                    sx={{ mt: 1, mb: 1 }}
                                 >
                                     Tạo tài khoản
+                                </CustomButton>
+                                <CustomButton
+                                    type="submit"
+                                    fullWidth
+                                    variant="outlined"
+                                    sx={{ mt: 1, mb: 1 }}
+                                >
+                                    Tạo tài khoản với Google <GoogleIcon />
                                 </CustomButton>
                                 <GridMui container>
                                     <GridMui item>

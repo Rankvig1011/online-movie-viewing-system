@@ -15,6 +15,7 @@ import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
 import React, { useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
+import GoogleIcon from '@mui/icons-material/Google';
 // import TextField from '@mui/material/TextField';
 import '../../index.css';
 export const Login = () => {
@@ -38,8 +39,8 @@ export const Login = () => {
                 <GridMui
                     container
                     sx={{
-                        width: '80%',
-                        height: '80%',
+                        width: '1300px',
+                        height: '600px',
                     }}
                 >
                     <CssBaseline />
@@ -53,8 +54,8 @@ export const Login = () => {
                             backgroundRepeat: 'no-repeat',
                             backgroundSize: 'cover',
                             backgroundPosition: 'center',
-                            borderRadius: '50px 0px 0px 50px',
                         }}
+                        component={Paper}
                     />
                     <GridMui
                         item
@@ -63,9 +64,7 @@ export const Login = () => {
                         md={5}
                         component={Paper}
                         elevation={6}
-                        // square
                         sx={{
-                            borderRadius: '0px 50px 50px 0px',
                             backgroundColor: 'rgba(255, 255, 255, 0.8)',
                         }}
                     >
@@ -121,9 +120,17 @@ export const Login = () => {
                                     type="submit"
                                     fullWidth
                                     variant="contained"
-                                    sx={{ mt: 3, mb: 2 }}
+                                    sx={{ mt: 1, mb: 1 }}
                                 >
                                     Đăng nhập
+                                </CustomButton>
+                                <CustomButton
+                                    type="submit"
+                                    fullWidth
+                                    variant="outlined"
+                                    sx={{ mt: 1, mb: 1 }}
+                                >
+                                    Đăng nhập với Google <GoogleIcon />
                                 </CustomButton>
                                 <GridMui container>
                                     <GridMui item xs>
