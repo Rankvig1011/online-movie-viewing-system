@@ -4,6 +4,7 @@ import { CollapseList } from '@/components/CollapseList';
 import MovieIcon from '@mui/icons-material/Movie';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import CategoryIcon from '@mui/icons-material/Category';
+import GroupIcon from '@mui/icons-material/Group';
 
 export const SideBar = () => {
     const navItems = [
@@ -19,8 +20,13 @@ export const SideBar = () => {
         },
         {
             icon: <MovieIcon />,
-            label: 'Movies',
-            to: '/admin/movies',
+            label: 'Movie',
+            to: '/admin/movie',
+        },
+        {
+            icon: <GroupIcon />,
+            label: 'Actor',
+            to: '/admin/actor',
         },
     ];
     return (

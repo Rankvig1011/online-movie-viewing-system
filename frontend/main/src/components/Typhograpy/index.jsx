@@ -29,3 +29,5 @@ export const Typography = ({ variant = 'h6', children, ...props }) => {
 
     return <StyledTypography {...props}>{children}</StyledTypography>;
 };
+
+export const Text = tw.div`text-sm text-black font-medium`;
