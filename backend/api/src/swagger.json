@@ -1,0 +1,885 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "API",
+    "description": "",
+    "version": "1.0.0"
+  },
+  "basePath": "/api",
+  "schemes": ["http", "https"],
+  "paths": {
+    "/auth/login": {
+      "post": {
+        "summary": "Login",
+        "tags": ["Auth"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "type": "object",
+              "username": {
+                "type":"string"
+              },
+              "password": {
+                "type":"string"
+              }
+            },
+            "example": {
+              "username": "lamvanthai0609",
+              "password": "Lamvanthai0609"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Login successful",
+            "schema": {
+              "access_token": "string"
+            }
+          },
+          "400": {
+            "description": "Invalid username or password"
+          },
+          "500":{
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/auth/resigter": {
+      "post": {
+        "summary": "Resigter",
+        "tags": ["Auth"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
+          }
+        ],
+        "responses":{
+          "201": {
+            "description": "Resigter successful",
+            "schema": {
+              "access_token": "string"
+            }
+          },
+          "400": {
+            "description": ""
+          },
+          "500":{
+            "description": "Internal server error"
+          }
+        
+        }
+      }
+    },
+    "/auth/profile":{
+      "get":{
+        "summary": "Get profile",
+        "tags": ["Auth"], 
+        "parameters": [
+          {
+            "in": "header",
+            "name": "Authorization"
+          }
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "responses":{
+          "401": {
+            "$ref": "#/components/responses/UnauthorizedError"
+          },
+          "200":{
+            "description": "Get profile successful",
+            "schema": {
+              "access_token": "string"
+            }
+          }
+        }
+      }
+    },
+    "/category":{
+      "get":{
+        "summary": "Get all category",
+        "tags": ["Category"],
+        "responses":{
+          "200": {
+            "description": "Get all category successful",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Category"
+              }
+            }
+          }
+        }
+      },
+      "post":{
+        "summary": "Create category",
+        "tags": ["Category"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Category"
+            }
+          }
+        ],
+        "responses":{
+          "201": {
+            "description": "Create category successful",
+            "schema": {
+              "$ref": "#/definitions/Category"
+            }
+          },
+          "400": {
+            "description": ""
+          },
+          "500":{
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/category/:id":{
+      "get":{
+        "summary": "Get category by id",
+        "tags": ["Category"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses":{
+          "200": {
+            "description": "Get category successful",
+            "schema": {
+              "$ref": "#/definitions/Category"
+            }
+          },
+          "400": {
+            "description": ""
+          },
+          "500":{
+            "description": "Internal server error"
+          }
+        }
+      },
+      "patch":{
+        "summary": "Update category",
+        "tags": ["Category"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Category"
+            }
+          }
+        ],
+        "responses":{
+          "200": {
+            "description": "Update category successful",
+            "schema": {
+              "$ref": "#/definitions/Category"
+            }
+          },
+          "400": {
+            "description": ""
+          },
+          "500":{
+            "description": "Internal server error"
+          }
+        }
+      },
+      "delete":{
+        "summary": "Delete category",
+        "tags": ["Category"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses":{
+          "200": {
+            "description": "Delete category successful"
+          },
+          "400": {
+            "description": ""
+          },
+          "500":{
+            "description": "Internal server error"
+          }
+        }
+      }
+      
+    },
+    "/movie":{
+      "get":{
+        "summary": "Get all movie",
+        "tags": ["Movie"],
+        "responses":{
+          "200": {
+            "description": "Get all movie successful",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Movie"
+              }
+            }
+          }
+        }
+      },
+      "post":{
+        "summary": "Create movie",
+        "tags": ["Movie"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Movie"
+            }
+          }
+        ],
+        "responses":{
+          "201": {
+            "description": "Create movie successful",
+            "schema": {
+              "$ref": "#/definitions/Movie"
+            }
+          },
+          "400": {
+            "description": ""
+          },
+          "500":{
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/movie/:id":{
+      "get":{
+        "summary": "Get movie by id",
+        "tags": ["Movie"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses":{
+          "200": {
+            "description": "Get movie successful",
+            "schema": {
+              "$ref": "#/definitions/Movie"
+            }
+          },
+          "400": {
+            "description": ""
+          },
+          "500":{
+            "description": "Internal server error"
+          }
+        }
+      },
+      "patch":{
+        "summary": "Update movie",
+        "tags": ["Movie"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Movie"
+            }
+          }
+        ],
+        "responses":{
+          "200": {
+            "description": "Update movie successful",
+            "schema": {
+              "$ref": "#/definitions/Movie"
+            }
+          },
+          "400": {
+            "description": ""
+          },
+          "500":{
+            "description": "Internal server error"
+          }
+        }
+      },
+      "delete":{
+        "summary": "Delete movie",
+        "tags": ["Movie"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses":{
+          "200": {
+            "description": "Delete movie successful"
+          },
+          "400": {
+            "description": ""
+          },
+          "500":{
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/episode":{
+      "get":{
+        "summary": "Get all episode",
+        "tags": ["Episode"],
+        "responses":{
+          "200": {
+            "description": "Get all episode successful",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Episode"
+              }
+            }
+          }
+        }
+      },
+      "post":{
+        "summary": "Create episode",
+        "tags": ["Episode"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Episode"
+            }
+          }
+        ],
+        "responses":{
+          "201": {
+            "description": "Create episode successful",
+            "schema": {
+              "$ref": "#/definitions/Episode"
+            }
+          },
+          "400": {
+            "description": ""
+          },
+          "500":{
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/episode/:id":{
+      "get":{
+        "summary": "Get episode by id",
+        "tags": ["Episode"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses":{
+          "200": {
+            "description": "Get episode successful",
+            "schema": {
+              "$ref": "#/definitions/Episode"
+            }
+          },
+          "400": {
+            "description": ""
+          },
+          "500":{
+            "description": "Internal server error"
+          }
+        }
+      },
+      "patch":{
+        "summary": "Update episode",
+        "tags": ["Episode"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Episode"
+            }
+          }
+        ],
+        "responses":{
+          "200": {
+            "description": "Update episode successful",
+            "schema": {
+              "$ref": "#/definitions/Episode"
+            }
+          },
+          "400": {
+            "description": ""
+          },
+          "500":{
+            "description": "Internal server error"
+          }
+        }
+      },
+      "delete":{
+        "summary": "Delete episode",
+        "tags": ["Episode"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses":{
+          "200": {
+            "description": "Delete episode successful"
+          },
+          "400": {
+            "description": ""
+          },
+          "500":{
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/episode?movie=:id":{
+      "get":{
+        "summary": "Get episode by movie id",
+        "tags": ["Episode"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "movie",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses":{
+          "200": {
+            "description": "Get episode successful",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Episode"
+              }
+            }
+          },
+          "400": {
+            "description": ""
+          },
+          "500":{
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/comment":{
+      "get":{
+        "summary": "Get all comment",
+        "tags": ["Comment"],
+        "responses":{
+          "200": {
+            "description": "Get all comment successful",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Comment"
+              }
+            }
+          }
+        }
+      },
+      "post":{
+        "summary": "Create comment",
+        "tags": ["Comment"],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Comment"
+            }
+          }
+        ],
+        "responses":{
+          "201": {
+            "description": "Create comment successful",
+            "schema": {
+              "$ref": "#/definitions/Comment"
+            }
+          },
+          "400": {
+            "description": ""
+          },
+          "500":{
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/comment/:id":{
+      "get":{
+        "summary": "Get comment by id",
+        "tags": ["Comment"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses":{
+          "200": {
+            "description": "Get comment successful",
+            "schema": {
+              "$ref": "#/definitions/Comment"
+            }
+          },
+          "400": {
+            "description": ""
+          },
+          "500":{
+            "description": "Internal server error"
+          }
+        }
+      },
+      "patch":{
+        "summary": "Update comment",
+        "tags": ["Comment"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Comment"
+            }
+          }
+        ],
+        "responses":{
+          "200": {
+            "description": "Update comment successful",
+            "schema": {
+              "$ref": "#/definitions/Comment"
+            }
+          },
+          "400": {
+            "description": ""
+          },
+          "500":{
+            "description": "Internal server error"
+          }
+        }
+      },
+      "delete":{
+        "summary": "Delete comment",
+        "tags": ["Comment"],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses":{
+          "200": {
+            "description": "Delete comment successful"
+          },
+          "400": {
+            "description": ""
+          },
+          "500":{
+            "description": "Internal server error"
+          }
+        }
+      }
+    },
+    "/comment?movie=:id":{
+      "get":{
+        "summary": "Get comment by movie id",
+        "tags": ["Comment"],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "movie",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses":{
+          "200": {
+            "description": "Get comment successful",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Comment"
+              }
+            }
+          },
+          "400": {
+            "description": ""
+          },
+          "500":{
+            "description": "Internal server error"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "History": {
+      "type": "object",
+      "properties": {
+        "movie": {
+          "type": "string",
+          "description": "ID of the movie",
+          "example": "607f1f77bcf86cd799439011"
+        },
+        "date": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when the movie was watched",
+          "example": "2024-04-16T12:00:00Z"
+        }
+      },
+      "required": ["movie", "date"]
+    },
+    "User": {
+      "type": "object",
+      "required": ["username", "password", "name", "email"],
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Unique username for the user",
+          "example": "john_doe"
+        },
+        "password": {
+          "type": "string",
+          "description": "User's password",
+          "example": "password123"
+        },
+        "name": {
+          "type": "string",
+          "description": "User's full name",
+          "example": "John Doe"
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "User's email address",
+          "example": "john@example.com"
+        },
+        "avatar": {
+          "type": "string",
+          "description": "URL of user's avatar image"
+        },
+        "history": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/History"
+          },
+          "description": "Array of movie history for the user"
+        },
+        "role": {
+          "type": "string",
+          "description": "User's role",
+          "example": "User"
+        },
+        "level": {
+          "type": "string",
+          "description": "User's level",
+          "example": "Normal"
+        },
+        "dateVipUserExpired": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date when VIP user status expires"
+        }
+      }
+    },
+    "Category": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "slug": { "type": "string" },
+        "image": { "type": "string" },
+        "status": { "type": "boolean" }
+      },
+      "required": ["name", "description"]
+    },
+    "Reply": {
+      "type": "object",
+      "properties": {
+        "userPost": { "type": "string", "format": "uuid" },
+        "userReply": { "type": "string", "format": "uuid" },
+        "content": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userPost", "userReply", "content"]
+    },
+    "Interaction": {
+      "type": "object",
+      "properties": {
+        "user": { "type": "string", "format": "uuid" },
+        "type": { "type": "string" }
+      },
+      "required": ["user", "type"]
+    },
+    "Comment": {
+      "type": "object",
+      "properties": {
+        "content": { "type": "string" },
+        "user": { "type": "string", "format": "uuid" },
+        "movie": { "type": "string", "format": "uuid" },
+        "status": { "type": "boolean" },
+        "interaction": { "$ref": "#/definitions/Interaction" },
+        "reply": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Reply" }
+        }
+      },
+      "required": ["content", "user", "movie"]
+    },
+    "Episode": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "link": { "type": "string" },
+        "movie": { "type": "string", "format": "uuid" },
+        "duration": { "type": "number" },
+        "durationStr": { "type": "string" },
+        "coverImage": { "type": "string" },
+        "animationImage": { "type": "string" },
+        "slug": { "type": "string" },
+        "alias": { "type": "string" },
+        "typeVideo": { "type": "string" },
+        "status": { "type": "boolean" }
+      },
+      "required": ["name", "link", "movie", "slug"]
+    },
+    "Actor": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "image": { "type": "string" }
+      }
+    },
+    "Movie": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string" },
+        "description": { "type": "string" },
+        "slug": { "type": "string" },
+        "image": { "type": "string" },
+        "imageH": { "type": "string" },
+        "trailer": { "type": "string" },
+        "category": { "type": "string", "format": "uuid" },
+        "totalVote": { "type": "number" },
+        "totalView": { "type": "number" },
+        "duration": { "type": "number" },
+        "durationStr": { "type": "string" },
+        "actors": {
+          "type": "array",
+          "items": { "$ref": "#/definitions/Actor" }
+        },
+        "status": { "type": "boolean" },
+        "isVip": { "type": "boolean" }
+      },
+      "required": ["name", "description", "slug", "category"]
+    },
+    "Vote": {
+      "type": "object",
+      "properties": {
+        "movie": { "type": "string", "format": "uuid" },
+        "user": { "type": "string", "format": "uuid" },
+        "vote": { "type": "number" },
+        "status": { "type": "boolean" }
+      },
+      "required": ["movie", "user", "vote"]
+    }
+  },
+  "components":{
+    "responses":{
+      "UnauthorizedError":{
+        "description": "Access token is missing or invalid"
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "in": "header",
+        "name": "Authorization",
+        "description": "Bearer token to access these api endpoints",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

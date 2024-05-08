@@ -11,6 +11,8 @@ import { Login } from '@/pages/main/Auth/components/Login';
 import { Register } from '@/pages/main/Auth/components/Register';
 import { Home } from '@/pages/main/Home';
 import { AdminLayout } from '@/layouts/AdminLayout';
+import { Dashboard } from '@/pages/admin/Dashboard';
+import { Actor } from '@/pages/admin/Actor';
 
 export const routerList = [
     {
@@ -35,7 +37,7 @@ export const routerList = [
             {
                 path: 'dashboard',
                 title: 'Dashboard',
-                element: <div>Dashboard</div>,
+                element: <Dashboard />,
             },
             {
                 path: 'category',
@@ -43,9 +45,14 @@ export const routerList = [
                 element: <div>Category</div>,
             },
             {
-                path: 'movies',
-                title: 'Movies',
+                path: 'movie',
+                title: 'Movie',
                 element: <div>Movies</div>,
+            },
+            {
+                path: 'actor',
+                title: 'Actor',
+                element: <Actor />,
             },
         ],
     },

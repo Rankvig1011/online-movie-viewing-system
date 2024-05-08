@@ -20,7 +20,7 @@ export const AdminLayout = () => {
                     </Container>
                 </Drawer>
             ) : (
-                <Container tw="w-[250px] bg-primary">
+                <Container tw=" w-[60px] md:w-[250px] bg-primary ">
                     <SideBar />
                 </Container>
             )}

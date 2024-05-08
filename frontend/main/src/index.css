@@ -24,4 +24,9 @@ input:focus-visible {
     --gray-100: #f7fafc;
     --gray-200: #edf2f7;
     --gray-300: #e2e8f0;
+    --tranperent: transparent;
+
+    --danger: #e53e3e;
+    --warning: #ed8936;
+    --black : #000;
 }

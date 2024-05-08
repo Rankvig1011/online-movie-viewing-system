@@ -1,0 +1,18 @@
+{
+    "name": "backend",
+    "version": "1.0.0",
+    "description": "",
+    "scripts": {
+      "api": "cd api && yarn dev",
+      "trainning": "cd trainning && yarn dev",
+      "install": "concurrently \"yarn\" \"cd api && yarn\" \"cd trainning && yarn\"",
+      "dev": "concurrently \"yarn api\" \"yarn trainning\""
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+      "concurrently": "^6.3.0"
+    }
+  }
+  

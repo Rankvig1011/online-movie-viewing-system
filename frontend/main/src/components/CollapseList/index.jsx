@@ -4,9 +4,12 @@ import React from 'react';
 import { Container } from '../layout';
 import { Link } from 'react-router-dom';
 import { Typography } from '../Typhograpy';
+import { useMobileScreen } from '@/hooks/views';
+import tw from 'twin.macro';
 
 export const CollapseList = ({ icon, label, onClick, children, to }) => {
     const [open, setOpen] = React.useState(false);
+    const isMobileScreen = useMobileScreen();
     const handleClick = () => {
         setOpen(!open);
         onClick && onClick();
@@ -17,7 +20,12 @@ export const CollapseList = ({ icon, label, onClick, children, to }) => {
             <Link to={to}>
                 <ListItemButton onClick={handleClick} tw="flex gap-4 !py-4">
                     {icon}
-                    <Typography tw="font-semibold">{label}</Typography>
+                    <Typography
+                        tw="font-semibold hidden md:block"
+                        css={[isMobileScreen && tw`block`]}
+                    >
+                        {label}
+                    </Typography>
                     {children && (open ? <ExpandLess /> : <ExpandMore />)}
                 </ListItemButton>
             </Link>
@@ -31,7 +39,12 @@ export const CollapseList = ({ icon, label, onClick, children, to }) => {
                                 tw="flex gap-4"
                             >
                                 <ListItemIcon>{child.icon}</ListItemIcon>
-                                <Typography tw="font-bold">{child.label}</Typography>
+                                <Typography
+                                    tw="font-bold hidden md:block"
+                                    css={[isMobileScreen && tw`block`]}
+                                >
+                                    {child.label}
+                                </Typography>
                             </ListItemButton>
                         </Link>
                     ))}
