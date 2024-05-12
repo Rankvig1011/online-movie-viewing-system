@@ -12,6 +12,10 @@ import axios from 'axios';
         super(movieModel);
     }
 
+    async findById(id){
+        return await movieModel.findById(id).populate('category').populate('actors');
+    }
+
     async findVipMovies() {
         return await movieModel.find({ isVip: true }.limit(10));
     }

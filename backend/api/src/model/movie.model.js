@@ -3,10 +3,6 @@ import mongooseDelete from 'mongoose-delete';
 import { createSlug } from '../common/index.js';
 const Schema = mongoose.Schema;
 
-const Actor = new Schema({
-    name: { type: String, required: true },
-    image: { type: String },
-});
 
 
 const Movie = new Schema(
@@ -22,7 +18,7 @@ const Movie = new Schema(
         totalView: { type: Number, default: 0 },
         duration: { type: Number},
         durationStr: { type: String,},
-        actors: [{ type: Actor }],
+        actors: [{ type: Schema.Types.ObjectId, ref: 'Actor' }],
         status: { type: Boolean, default: true },
         isVip: { type: Boolean, default: false },
     },

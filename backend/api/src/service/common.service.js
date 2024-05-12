@@ -3,9 +3,9 @@ import { folderCloudinary } from "../common/index.js";
 import fs from 'fs';
 
 v2.config({
-    cloud_name: 'your_cloud_name',
-    api_key: 'your_api_key',
-    api_secret: 'your_api_secret'
+    cloud_name: 'ducw36fi3',
+    api_key: '363665853292734',
+    api_secret: 'CG-o4IuNJA-n_oxA6duU4VCwpbs'
   });
 
 class CommonService {
@@ -19,6 +19,14 @@ class CommonService {
             fileStream.pipe(upload);
         });
     } 
+    uploadURL (url, folderClound) {
+        return new Promise((resolve, reject) => {
+            v2.uploader.upload(url, {folder: folderClound}, (error, result) => {
+                if (error) return reject(error);
+                resolve(result);
+            });
+        });
+    }
 }
 
 export default new CommonService();
