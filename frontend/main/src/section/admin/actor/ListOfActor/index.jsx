@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container, Grid } from '@/components/layout';
-import { Avatar, Tooltip } from '@mui/material';
+import { Avatar, Pagination, Tooltip } from '@mui/material';
 import tw from 'twin.macro';
 import { Text } from '@/components/Typhograpy';
 import { UnstyledButton } from '@/components/interaction';
@@ -11,29 +11,31 @@ import { DialogForm } from '@/components/DialogForm';
 
 const TextCustom = tw.span`text-black text-sm font-medium truncate`;
 
-export const ListOfActor = ({ setActorInfo }) => {
+export const ListOfActor = ({ actors = [], setActorInfo }) => {
     const [actorId, setActorId] = React.useState();
 
-    const actors = [
-        {
-            id: 1,
-            name: 'Test1',
-            images: [
-                'https://image.tmdb.org/t/p/w500/6Wdl9N6dL0Hi0T1qJLWSz6gMLbd.jpg',
-                'https://image.tmdb.org/t/p/w500/6Wdl9N6dL0Hi0T1qJLWSz6gMLbd.jpg',
-            ],
-        },
-        {
-            id: 2,
-            name: 'Test2',
-            images: [
-                'https://image.tmdb.org/t/p/w500/6Wdl9N6dL0Hi0T1qJLWSz6gMLbd.jpg',
-                'https://image.tmdb.org/t/p/w500/6Wdl9N6dL0Hi0T1qJLWSz6gMLbd.jpg',
-            ],
-        },
-    ];
+    const itemInPage = React.useRef(10);
+    const actorSplitByPage = React.useMemo(() => {
+        return actors.reduce((acc, _, index) => {
+            const pageIndex = Math.floor(index / itemInPage.current);
+            if (!acc[pageIndex]) {
+                acc[pageIndex] = [];
+            }
+            acc[pageIndex].push(_);
+            return acc;
+        }, []);
+    }, [actors]);
+
+    const [actorData, setActorData] = React.useState(actorSplitByPage[0]);
+
+    const [page, setPage] = React.useState(1);
+    const handleChange = (event, value) => {
+        setPage(value);
+        setActorData(actorSplitByPage[value - 1]);
+    };
+
     const listColumns = {
-        id: tw`col-span-1 text-center`,
+        index: tw`col-span-1 text-center`,
         name: tw`col-span-3`,
         image: tw`col-span-5`,
         actions: tw`col-span-3 text-center`,
@@ -47,19 +49,19 @@ export const ListOfActor = ({ setActorInfo }) => {
                     </Grid.Col>
                 ))}
             </Grid>
-            {actors.map((actor, index) => (
+            {actorData.map((actor, index) => (
                 <Grid
                     key={index}
                     tw="w-full p-2 px-4 my-1 bg-white rounded-md duration-200 cursor-pointer border-b hover:(-translate-y-1 shadow-md)"
                 >
                     <Grid.Col tw="col-span-1 flex items-center justify-center">
-                        <TextCustom>{actor.id}</TextCustom>
+                        <TextCustom>{(page - 1) * 10 + (index + 1)}</TextCustom>
                     </Grid.Col>
                     <Grid.Col tw="col-span-3 flex items-center">
                         <TextCustom>{actor.name}</TextCustom>
                     </Grid.Col>
                     <Grid.Col tw="col-span-5 flex items-center">
-                        {actor.images.map((image, index) => (
+                        {actor.image.map((image, index) => (
                             <Tooltip label={actor.name} key={index}>
                                 <Avatar
                                     radius="xl"
@@ -91,6 +93,13 @@ export const ListOfActor = ({ setActorInfo }) => {
                     </Grid.Col>
                 </Grid>
             ))}
+            <Container tw="justify-end py-2">
+                <Pagination
+                    count={Math.ceil(actors.length / itemInPage.current)}
+                    page={page}
+                    onChange={handleChange}
+                />
+            </Container>
             <ModalCustom opened={Boolean(actorId)} onClose={() => setActorId()}>
                 <Container tw="w-[500px]">
                     <DialogForm onCancel={() => setActorId()} />
