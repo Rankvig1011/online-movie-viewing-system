@@ -1,5 +1,4 @@
-import Image from '@/assets/images/backgroudMovie.jpg';
-import AvatarMui from '@/components/Atom/AvatarMui/AvatarMui';
+import Image from '@/assets/images/bg.png';
 import CustomButton from '@/components/Atom/CustomButton/CustomButton';
 import GridMui from '@/components/Atom/Grid/GridMui';
 import ThemeProviderTheme from '@/components/Atom/ThemeProvider/ThemeProviderTheme';
@@ -7,7 +6,7 @@ import BoxField from '@/components/Forms/BoxField/BoxField';
 import CustomTextField from '@/components/Forms/TextField/CustomTextField';
 import { Typography } from '@/components/Typhograpy';
 import { emailValidators, nameValidator } from '@/utils/regex';
-import PersonIcon from '@mui/icons-material/Person';
+import Logo from '@/assets/images/logo.png';
 import { CssBaseline } from '@mui/material';
 import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
@@ -17,6 +16,10 @@ import '../../index.css';
 import GoogleIcon from '@mui/icons-material/Google';
 // import TextField from '@mui/material/TextField';
 export const Register = () => {
+    const logoStyle = {
+        width: '80px',
+        // height: 'auto',
+    };
     const formValid = useRef({
         name: false,
         email: false,
@@ -45,7 +48,7 @@ export const Register = () => {
                     container
                     sx={{
                         width: '1300px',
-                        height: '600px',
+                        height: '650px',
                     }}
                 >
                     <CssBaseline />
@@ -83,9 +86,9 @@ export const Register = () => {
                                 alignItems: 'center',
                             }}
                         >
-                            <AvatarMui sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                                <PersonIcon />
-                            </AvatarMui>
+                            <BoxField sx={{ ml: '-10px' }}>
+                                <img src={Logo} style={logoStyle} alt="logo of sitemark" />
+                            </BoxField>
                             <Typography component="h1" variant="h5">
                                 Đăng ký
                             </Typography>

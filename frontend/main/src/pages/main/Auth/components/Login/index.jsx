@@ -1,5 +1,4 @@
-import Image from '@/assets/images/backgroudMovie.jpg';
-import AvatarMui from '@/components/Atom/AvatarMui/AvatarMui';
+import Image from '@/assets/images/bg.png';
 import CustomButton from '@/components/Atom/CustomButton/CustomButton';
 import GridMui from '@/components/Atom/Grid/GridMui';
 import ThemeProviderTheme from '@/components/Atom/ThemeProvider/ThemeProviderTheme';
@@ -9,7 +8,7 @@ import CustomFormControlLabel from '@/components/Forms/FormControlLabel/CustomFo
 import CustomTextField from '@/components/Forms/TextField/CustomTextField';
 import { Typography } from '@/components/Typhograpy';
 import { emailValidators } from '@/utils/regex';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import Logo from '@/assets/images/logo.png';
 import { CssBaseline } from '@mui/material';
 import Link from '@mui/material/Link';
 import Paper from '@mui/material/Paper';
@@ -19,6 +18,10 @@ import GoogleIcon from '@mui/icons-material/Google';
 // import TextField from '@mui/material/TextField';
 import '../../index.css';
 export const Login = () => {
+    const logoStyle = {
+        width: '80px',
+        height: 'auto',
+    };
     const formValid = useRef({ password: false, email: false });
     // const history = useHistory();
     const navigate = useNavigate();
@@ -40,7 +43,7 @@ export const Login = () => {
                     container
                     sx={{
                         width: '1300px',
-                        height: '600px',
+                        height: '650px',
                     }}
                 >
                     <CssBaseline />
@@ -77,9 +80,9 @@ export const Login = () => {
                                 alignItems: 'center',
                             }}
                         >
-                            <AvatarMui sx={{ m: 1, bgcolor: 'secondary.main' }}>
-                                <LockOutlinedIcon />
-                            </AvatarMui>
+                            <BoxField sx={{ ml: '-10px' }}>
+                                <img src={Logo} style={logoStyle} alt="logo of sitemark" />
+                            </BoxField>
                             <Typography component="h1" variant="h5">
                                 Đăng nhập
                             </Typography>
