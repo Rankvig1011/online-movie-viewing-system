@@ -9,7 +9,7 @@ import { Typography } from '@/components/Typhograpy';
 export const ActorForm = ({ actorInfo }) => {
     const [name, setName] = React.useState(actorInfo?.name || '');
     const [error, setError] = React.useState('');
-    const [files, setFiles] = React.useState(actorInfo?.images || []);
+    const [files, setFiles] = React.useState(actorInfo?.image || []);
     const handleSubmit = (e) => {
         e.preventDefault();
         if (!name) {
@@ -20,10 +20,15 @@ export const ActorForm = ({ actorInfo }) => {
         console.log({ name, images: files });
     };
 
+    React.useEffect(() => {
+        setName(actorInfo?.name || '');
+        setFiles(actorInfo?.image || []);
+    }, [actorInfo]);
+
     return (
         <Container tw="flex-col py-2">
             <form tw="flex gap-2 flex-col" onSubmit={handleSubmit}>
-                {actorInfo && <Typography tw="text-sm">ID : {actorInfo.id}</Typography>}
+                {actorInfo && <Typography tw="text-sm">ID : {actorInfo._id}</Typography>}
                 <InputBase
                     label="Name"
                     placeholder="Enter name actor"

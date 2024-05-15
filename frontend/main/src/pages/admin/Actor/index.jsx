@@ -1,5 +1,6 @@
 import { Container } from '@/components/layout';
 import { ModalCustom } from '@/components/ModalCustom';
+import { useActor } from '@/hooks/actor';
 import { ActorForm, ListOfActor } from '@/section/admin/actor';
 import { Button } from '@mui/material';
 import React from 'react';
@@ -11,6 +12,8 @@ export const Actor = () => {
     const handleOpenAddNewActor = () => setIsOpenAddNewActor(true);
     const handleCloseAddNewActor = () => setIsOpenAddNewActor(false);
 
+    const { actors } = useActor();
+
     return (
         <>
             <Container tw="flex-col p-4 gap-2">
@@ -21,7 +24,7 @@ export const Actor = () => {
                 </Container>
                 <Container tw="gap-2 flex-col xl:flex-row">
                     <Container tw="w-full xl:w-1/2" css={[!editActorInfo && tw`!w-full`]}>
-                        <ListOfActor setActorInfo={setEditActorInfo} />
+                        <ListOfActor actors={actors} setActorInfo={setEditActorInfo} />
                     </Container>
                     {editActorInfo && (
                         <Container tw="border w-full xl:w-1/2 p-2">

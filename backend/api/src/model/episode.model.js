@@ -8,13 +8,13 @@ const Schema = mongoose.Schema;
 const Episode = new Schema(
     {
         name: {type: String, required: true },
-        link: { type: String, required: true },
+        link: { type: String },
         movie: { type: Schema.Types.ObjectId, ref: 'Movie' },
         duration: { type: Number},
         durationStr: { type: String},
         coverImage: { type: String },
         animationImage: { type: String },
-        slug: { type: String, required: true },
+        slug: { type: String },
         alias: { type: String },
         typeVideo: { type: String },
         position: { type: Number },
