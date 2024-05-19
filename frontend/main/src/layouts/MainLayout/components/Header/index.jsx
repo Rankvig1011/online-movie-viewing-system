@@ -12,6 +12,7 @@ import MenuItem from '@mui/material/MenuItem';
 import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import Logo from '@/assets/images/logo.png';
+import { Link, useNavigate } from 'react-router-dom';
 const logoStyle = {
     width: '80px',
     height: 'auto',
@@ -20,7 +21,7 @@ const logoStyle = {
 
 export const Header = () => {
     const [open, setOpen] = useState(false);
-
+    const navigate = useNavigate();
     const toggleDrawer = (newOpen) => () => {
         setOpen(newOpen);
     };
@@ -38,7 +39,14 @@ export const Header = () => {
             setOpen(false);
         }
     };
-
+    //login
+    const handleClickLogin = () => {
+        navigate('/auth/login');
+    };
+    //register
+    const handleClickRegister = () => {
+        navigate('/auth/register');
+    };
     return (
         <AppBar
             position="fixed"
@@ -87,17 +95,21 @@ export const Header = () => {
                                 onClick={() => scrollToSection('Trang chủ')}
                                 sx={{ py: '6px', px: '12px' }}
                             >
-                                <Typography variant="body2" color="text.primary">
-                                    Trang chủ
-                                </Typography>
+                                <Link to={`/`}>
+                                    <Typography variant="body2" color="text.primary">
+                                        Trang chủ
+                                    </Typography>
+                                </Link>
                             </MenuItem>
                             <MenuItem
                                 onClick={() => scrollToSection('Thể loại')}
                                 sx={{ py: '6px', px: '12px' }}
                             >
-                                <Typography variant="body2" color="text.primary">
-                                    Thể loại
-                                </Typography>
+                                <Link to={`/category`}>
+                                    <Typography variant="body2" color="text.primary">
+                                        Thể loại
+                                    </Typography>
+                                </Link>
                             </MenuItem>
                             <MenuItem
                                 onClick={() => scrollToSection('Thịnh hành')}
@@ -138,8 +150,8 @@ export const Header = () => {
                             variant="text"
                             size="small"
                             component="a"
-                            href="/material-ui/getting-started/templates/sign-in/"
                             target="_blank"
+                            onClick={handleClickLogin}
                         >
                             Đăng nhập
                         </Button>
@@ -148,8 +160,8 @@ export const Header = () => {
                             variant="contained"
                             size="small"
                             component="a"
-                            href="/material-ui/getting-started/templates/sign-up/"
                             target="_blank"
+                            onClick={handleClickRegister}
                         >
                             Đăng ký
                         </Button>
@@ -187,10 +199,10 @@ export const Header = () => {
                             /> */}
                                 </Box>
                                 <MenuItem onClick={() => scrollToSection('Trang chủ')}>
-                                    Trang chủ
+                                    <Link to={`/`}>Trang chủ</Link>
                                 </MenuItem>
                                 <MenuItem onClick={() => scrollToSection('Thể loại')}>
-                                    Thể loại
+                                    <Link to={`/category`}>Thể loại</Link>
                                 </MenuItem>
                                 <MenuItem onClick={() => scrollToSection('Thịnh hành')}>
                                     Thịnh hành
@@ -205,9 +217,8 @@ export const Header = () => {
                                         color="primary"
                                         variant="contained"
                                         component="a"
-                                        href="/material-ui/getting-started/templates/sign-up/"
-                                        target="_blank"
                                         sx={{ width: '100%' }}
+                                        onClick={handleClickLogin}
                                     >
                                         Đăng nhập
                                     </Button>
@@ -217,9 +228,8 @@ export const Header = () => {
                                         color="primary"
                                         variant="outlined"
                                         component="a"
-                                        href="/material-ui/getting-started/templates/sign-in/"
-                                        target="_blank"
                                         sx={{ width: '100%' }}
+                                        onClick={handleClickRegister}
                                     >
                                         Đăng ký
                                     </Button>

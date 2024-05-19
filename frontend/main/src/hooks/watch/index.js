@@ -1,16 +1,15 @@
 import { appContainer } from '@/service/container';
 import { useQuery } from '@tanstack/react-query';
+const { watchService } = appContainer.cradle;
 
-const { movieService } = appContainer.cradle;
-
-const getMovies = movieService.get.bind(movieService);
-export const useMovie = () => {
+const getWatch = watchService.get.bind(watchService);
+export const useWatch = (id) => {
     const { data, isPending, error } = useQuery({
-        queryKey: ['movie'],
-        queryFn: getMovies,
+        queryKey: [`watch/${id}`],
+        queryFn: getWatch,
     });
     return {
-        movies: data?.results || [],
+        watch: data?.results || [],
         isLoading: isPending,
         isError: error,
     };

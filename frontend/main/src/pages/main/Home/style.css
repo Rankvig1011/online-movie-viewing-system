@@ -1,7 +1,7 @@
 .videocard {
     width: 450px !important;
     height: 380px !important;
-    margin: 20px;
+    margin: 30px;
     padding: 20px;
     transition: all 0.5s;
 
@@ -23,8 +23,8 @@
     &:hover {
         .videocard__stats {
             display: flex;
-            align-items: center;
-            justify-content: center;
+            align-items: left;
+            justify-content: left;
         }
     }
 }

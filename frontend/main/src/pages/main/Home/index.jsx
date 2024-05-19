@@ -1,35 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MainFeaturedPost from './components/MainFeaturedPost';
 import Navbar from './components/Navbar';
 import Results from './components/Results';
+import { useCategory } from '@/hooks/category';
 
 export const Home = () => {
+    const { categories } = useCategory();
+    const [category, setCategory] = useState('');
     const mainFeaturedPost = {
-        title: 'Title of a longer featured blog post',
+        title: 'Trải nghiệm giải trí đỉnh cao tại nhà',
         description:
-            "Multiple lines of text that form the lede, informing new readers quickly and efficiently about what's most interesting in this post's contents.",
-        image: 'https://source.unsplash.com/random?wallpapers',
+            'Trình duyệt xem phim hiện nay không chỉ đơn thuần là công cụ giải trí mà còn mang lại trải nghiệm điện ảnh cao cấp ngay tại nhà. Với chất lượng hình ảnh và âm thanh vượt trội, thư viện nội dung đa dạng cùng các tính năng tiện ích, việc xem phim trở nên thú vị và dễ dàng hơn bao giờ hết.',
         imageText: 'main image description',
-        linkText: 'Continue reading…',
     };
-    const sections = [
-        { title: 'Xu hướng', url: '#' },
-        { title: 'Hàng đầu', url: '#' },
-        { title: 'Hành động', url: '#' },
-        { title: 'Hài kịch', url: '#' },
-        { title: 'Kinh dị', url: '#' },
-        { title: 'Lãng mạn', url: '#' },
-        { title: 'Bí ẩn', url: '#' },
-        { title: 'khoa học viễn tưởng', url: '#' },
-        { title: 'miền Tây', url: '#' },
-        { title: 'Hoạt hình', url: '#' },
-    ];
+    const handleChangeCategory = (id) => {
+        setCategory(id);
+    };
     return (
         <>
             <main>
                 <MainFeaturedPost post={mainFeaturedPost} />
-                <Navbar title="Chọn lọc" sections={sections} />
-                <Results />
+                <Navbar
+                    title="Chọn lọc"
+                    sections={categories}
+                    handleChangeCategory={handleChangeCategory}
+                />
+                <Results category={category ?? ''} />
             </main>
         </>
     );
