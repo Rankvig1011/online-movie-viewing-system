@@ -1,50 +1,46 @@
-import UserService from "./user.service.js";
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import { ErrorApp } from "../common/index.js";
+import UserService from './user.service.js';
+import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken';
+import { ErrorApp } from '../common/index.js';
 
 class AuthService {
-    userService = UserService
-    keyToken = 'DOAN'
-    constructor() {
-    }
-    
+    userService = UserService;
+    keyToken = 'DOAN';
+    constructor() {}
+
     async login(username, password) {
         if (!username || !password) {
             throw new ErrorApp('Invalid username or password', 400);
         }
-        const user = await this.userService.findOne({username});
+        const user = await this.userService.findOne({ username });
         if (user && this.comparePassword(password, user.password)) {
-            const { password, ...result } = user["_doc"];
+            const { password, ...result } = user['_doc'];
             return this.createToken(result);
-        }
-        else {
+        } else {
             throw new ErrorApp('Invalid username or password', 400);
-        }   
+        }
     }
-    
+
     async register(user) {
-        if (!user.username || !user.password) { 
+        if (!user.username || !user.password) {
             throw new ErrorApp('Invalid username or password', 400);
         }
-        if (await this.userService.findOne({username : user.username})) {
+        if (await this.userService.findOne({ username: user.username })) {
             throw new ErrorApp('Username is already taken', 400);
         }
         const result = await this.userService.create(user);
         return this.createToken(result);
     }
 
-    async me(token){
-        try{
+    async me(token) {
+        try {
             const decoded = jwt.verify(token, this.keyToken);
-            return this.userService.findOne({username: decoded.username } , '-password');
-        }
-        catch (error) {
+            return this.userService.findOne({ username: decoded.username }, '-password');
+        } catch (error) {
             throw new ErrorApp('Invalid token', 401);
         }
-
     }
-    
+
     async loginGoogle(user) {
         const result = await this.userService.createWithGoogle(user);
         return this.createToken(result);
@@ -62,12 +58,11 @@ class AuthService {
             level: result.level,
         };
         return {
-            access_token: jwt.sign(payload, this.keyToken,  {
+            access_token: jwt.sign(payload, this.keyToken, {
                 expiresIn: '10d',
             }),
         };
     }
-    
 }
 
 export default new AuthService();

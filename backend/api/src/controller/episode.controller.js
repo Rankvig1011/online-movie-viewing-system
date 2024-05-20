@@ -1,6 +1,5 @@
-
 import episodeService from '../service/episode.service.js';
-import GeneralController from './general.controller.js'
+import GeneralController from './general.controller.js';
 
 class EpisodeController extends GeneralController {
     constructor() {

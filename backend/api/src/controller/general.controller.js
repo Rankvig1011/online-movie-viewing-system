@@ -1,4 +1,4 @@
-import { ResponseApp } from "../common/response.js";
+import { ResponseApp } from '../common/response.js';
 
 class GeneralController {
     constructor(service) {
@@ -9,11 +9,10 @@ class GeneralController {
         this.find = this.find.bind(this);
         this.findOne = this.findOne.bind(this);
         this.findById = this.findById.bind(this);
-
     }
     async create(req, res) {
         try {
-            const data = await this.service.create(req.body);
+            const data = await this.service.create(req.body, req.files);
             ResponseApp.created(res, data);
         } catch (error) {
             ResponseApp.failed(res, error);
@@ -21,18 +20,18 @@ class GeneralController {
     }
     async update(req, res) {
         try {
-            const data = await this.service.update(req.params.id, req.body);
+            const data = await this.service.update(req.params.id, req.body, req.files);
             ResponseApp.ok(res, data);
         } catch (error) {
-            ResponseApp.failed(res, error );
+            ResponseApp.failed(res, error);
         }
     }
-     async delete(req, res) {
+    async delete(req, res) {
         try {
             await this.service.delete(req.params.id);
             ResponseApp.done(res);
         } catch (error) {
-            ResponseApp.failed(res, error );
+            ResponseApp.failed(res, error);
         }
     }
     async find(req, res) {
@@ -48,7 +47,7 @@ class GeneralController {
             const data = await this.service.findOne(req.params.id);
             ResponseApp.ok(res, data);
         } catch (error) {
-            ResponseApp.failed(res, error );
+            ResponseApp.failed(res, error);
         }
     }
     async findById(req, res) {
@@ -56,7 +55,7 @@ class GeneralController {
             const data = await this.service.findById(req.params.id);
             ResponseApp.ok(res, data);
         } catch (error) {
-            ResponseApp.failed(res, error );
+            ResponseApp.failed(res, error);
         }
     }
 }

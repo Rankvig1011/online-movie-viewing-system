@@ -1,25 +1,24 @@
-
- class GeneralService {
+class GeneralService {
     constructor(model) {
         this.model = model;
     }
-    async create(data){
+    async create(data, files = null) {
         const entity = new this.model(data);
         return await entity.save();
     }
-    async update(id, data) {
+    async update(id, data, files = null) {
         return await this.model.findByIdAndUpdate(id, data, { new: true }).exec();
     }
-    async delete(id){
+    async delete(id) {
         await this.model.findByIdAndDelete(id).exec();
     }
-    async find(){
+    async find() {
         return await this.model.find();
     }
-    async findOne(data , option = null){
-        return await this.model.findOne(data,option);
+    async findOne(data, option = null) {
+        return await this.model.findOne(data, option);
     }
-    async findById(id){
+    async findById(id) {
         return await this.model.findById(id);
     }
 }

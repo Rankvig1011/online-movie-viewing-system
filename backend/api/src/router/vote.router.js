@@ -1,4 +1,4 @@
-import voteController from "../controller/vote.controller.js";
+import voteController from '../controller/vote.controller.js';
 import express from 'express';
 
 const router = express.Router();

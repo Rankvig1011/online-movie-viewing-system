@@ -7,12 +7,11 @@ import React from 'react';
 import tw from 'twin.macro';
 
 export const Actor = () => {
+    const { actors } = useActor();
     const [isOpenAddNewActor, setIsOpenAddNewActor] = React.useState(false);
     const [editActorInfo, setEditActorInfo] = React.useState();
     const handleOpenAddNewActor = () => setIsOpenAddNewActor(true);
     const handleCloseAddNewActor = () => setIsOpenAddNewActor(false);
-
-    const { actors } = useActor();
 
     return (
         <>
@@ -39,7 +38,7 @@ export const Actor = () => {
                 onClose={handleCloseAddNewActor}
             >
                 <Container tw="w-[1000px]">
-                    <ActorForm />
+                    <ActorForm onClose={handleCloseAddNewActor} />
                 </Container>
             </ModalCustom>
         </>

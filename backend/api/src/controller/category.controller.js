@@ -1,6 +1,5 @@
-
 import categoryService from '../service/category.service.js';
-import GeneralController from './general.controller.js'
+import GeneralController from './general.controller.js';
 
 class CategoryController extends GeneralController {
     constructor() {

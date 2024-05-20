@@ -47,7 +47,9 @@ class MovieService extends GeneralService {
     const result = await commonService.uploadImage(file, "search");
     const respon = await axios.post(
       "http://localhost:3201/api/v1/face-api/data-link",
-      { url: result.secure_url }
+      {
+        url: result.secure_url,
+      }
     );
     let queryActors = [];
     let actors = [];
@@ -68,4 +70,5 @@ class MovieService extends GeneralService {
     return movieModel.find().sort({ totalView: -1 }).limit(10);
   }
 }
+
 export default new MovieService();

@@ -1,15 +1,15 @@
-import mongoose from "mongoose";
-import mongooseDelete from "mongoose-delete";
+import mongoose from 'mongoose';
+import mongooseDelete from 'mongoose-delete';
 const Schema = mongoose.Schema;
 
 const Actor = new Schema(
-  {
-    name: { type: String, required: true },
-    image: [{ type: String }],
-  },
-  { timestamps: true }
+    {
+        name: { type: String, required: true },
+        image: [{ type: String }],
+    },
+    { timestamps: true }
 );
 
-Actor.plugin(mongooseDelete, { deleteAt: true, overrideMethods: "all" });
+Actor.plugin(mongooseDelete, { deleteAt: true, overrideMethods: 'all' });
 
-export default mongoose.model("Actor", Actor);
+export default mongoose.model('Actor', Actor);
