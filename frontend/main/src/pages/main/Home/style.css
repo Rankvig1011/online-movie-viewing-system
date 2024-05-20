@@ -1,0 +1,30 @@
+.videocard {
+    width: 450px !important;
+    height: 380px !important;
+    margin: 30px;
+    padding: 20px;
+    transition: all 0.5s;
+
+    &:hover {
+        transform: scale(1.09);
+    }
+    .videocard__img {
+        overflow: hidden;
+        img {
+            width: 450px;
+            height: 280px;
+            object-fit: cover;
+            vertical-align: bottom;
+        }
+    }
+    .videocard__stats {
+        display: none;
+    }
+    &:hover {
+        .videocard__stats {
+            display: flex;
+            align-items: left;
+            justify-content: left;
+        }
+    }
+}

@@ -43,5 +43,6 @@
     "@babel/preset-env": "^7.24.4",
     "babel-plugin-module-resolver": "^5.0.0",
     "nodemon": "^3.1.0"
-  }
+  },
+  "packageManager": "yarn@4.2.2"
 }

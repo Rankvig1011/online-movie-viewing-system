@@ -4,6 +4,7 @@ import { MovieService } from './movie';
 import { EpisodeService } from './episode';
 import { CommonService } from './common';
 import { ActorService } from './actor';
+import { WatchService } from './watch';
 
 export const appContainer = awilix.createContainer();
 
@@ -13,4 +14,5 @@ appContainer.register({
     episodeService: awilix.asClass(EpisodeService).singleton(),
     commonService: awilix.asClass(CommonService).singleton(),
     actorService: awilix.asClass(ActorService).singleton(),
+    watchService: awilix.asClass(WatchService).singleton(),
 });
