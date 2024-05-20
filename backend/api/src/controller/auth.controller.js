@@ -1,6 +1,5 @@
-import { ResponseApp } from "../common/response.js";
-import authService from "../service/auth.service.js";
-
+import { ResponseApp } from '../common/response.js';
+import authService from '../service/auth.service.js';
 
 class AuthController {
     constructor() {
@@ -17,7 +16,6 @@ class AuthController {
         } catch (error) {
             ResponseApp.failed(res, error);
         }
-        
     }
 
     async login(req, res) {
@@ -38,7 +36,7 @@ class AuthController {
             ResponseApp.failed(res, error);
         }
     }
-    
+
     async loginGoogle(req, res) {
         try {
             const data = await this.authService.loginGoogle(req.body);

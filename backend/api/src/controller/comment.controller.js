@@ -1,6 +1,5 @@
-
 import commentService from '../service/comment.service.js';
-import GeneralController from './general.controller.js'
+import GeneralController from './general.controller.js';
 
 class CommentController extends GeneralController {
     constructor() {

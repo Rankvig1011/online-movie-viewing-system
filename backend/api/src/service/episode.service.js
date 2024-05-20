@@ -1,6 +1,5 @@
-
 import episodeModel from '../model/episode.model.js';
-import GeneralService from './general.service.js'
+import GeneralService from './general.service.js';
 
 class EpisodeService extends GeneralService {
     constructor() {
@@ -10,6 +9,5 @@ class EpisodeService extends GeneralService {
     async findEpisodeByMovieId(movie) {
         return await episodeModel.find({ movie });
     }
-
 }
 export default new EpisodeService();

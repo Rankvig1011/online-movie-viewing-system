@@ -8,7 +8,7 @@ const Vote = new Schema(
         vote: { type: Number, required: true },
         status: { type: Boolean, default: true },
     },
-    { timestamps: true },
+    { timestamps: true }
 );
 
 export default mongoose.model('Vote', Vote);

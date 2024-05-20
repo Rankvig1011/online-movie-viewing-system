@@ -1,14 +1,14 @@
 export const Role = {
-    Admin: "admin",
-    User: "user",
+    Admin: 'admin',
+    User: 'user',
 };
 
 export const Level = {
-    VIP: "vip",
-    Normal: "normal",
+    VIP: 'vip',
+    Normal: 'normal',
 };
 
 export const TypeMovie = {
-    Single: "single",
-    Series: "series",
+    Single: 'single',
+    Series: 'series',
 };

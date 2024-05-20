@@ -1,6 +1,6 @@
-import movieController from "../controller/movie.controller.js";
+import movieController from '../controller/movie.controller.js';
 import express from 'express';
-import middleware from "../middleware/index.js";
+import middleware from '../middleware/index.js';
 
 const router = express.Router();
 

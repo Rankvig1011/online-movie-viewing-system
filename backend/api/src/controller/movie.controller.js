@@ -1,7 +1,6 @@
-
 import { ResponseApp } from '../common/response.js';
 import movieService from '../service/movie.service.js';
-import GeneralController from './general.controller.js'
+import GeneralController from './general.controller.js';
 
 class MovieController extends GeneralController {
     constructor() {
@@ -17,7 +16,7 @@ class MovieController extends GeneralController {
         }
     }
 
-    async findByImage (req, res) {
+    async findByImage(req, res) {
         try {
             const { file } = req;
             const result = await movieService.findByImage(file);
@@ -27,7 +26,7 @@ class MovieController extends GeneralController {
         }
     }
 
-    async findTopViewByCategory (req, res) {
+    async findTopViewByCategory(req, res) {
         try {
             const movies = await movieService.findTopViewByCategory();
             ResponseApp.ok(movies, res);
@@ -36,7 +35,7 @@ class MovieController extends GeneralController {
         }
     }
 
-    async findTopView (req, res) {
+    async findTopView(req, res) {
         try {
             const movies = await movieService.findTopView();
             ResponseApp.ok(movies, res);

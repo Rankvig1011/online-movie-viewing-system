@@ -4,13 +4,12 @@ const Schema = mongoose.Schema;
 
 const Actor = new Schema(
     {
-        name: {type: String, required: true },
+        name: { type: String, required: true },
         image: [{ type: String }],
     },
-    { timestamps: true },
+    { timestamps: true }
 );
 
 Actor.plugin(mongooseDelete, { deleteAt: true, overrideMethods: 'all' });
-
 
 export default mongoose.model('Actor', Actor);

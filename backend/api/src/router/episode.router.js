@@ -1,12 +1,12 @@
-import episodeController from "../controller/episode.controller.js";
+import episodeController from '../controller/episode.controller.js';
 import express from 'express';
-import middleware from "../middleware/index.js";
+import middleware from '../middleware/index.js';
 
 const router = express.Router();
 
 router.get('/', episodeController.find);
 router.get('/:id', episodeController.findById);
-router.get('/?movie=:id' , episodeController.findEpisodeByMovieId);
+router.get('/?movie=:id', episodeController.findEpisodeByMovieId);
 router.use(middleware.authenticate);
 router.use(middleware.authorizeForAdmin);
 router.post('/', episodeController.create);
