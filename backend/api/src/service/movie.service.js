@@ -15,7 +15,7 @@ class MovieService extends GeneralService {
     return await movieModel
       .findById(id)
       .populate("category")
-      .populate("actors ");
+      .populate("actors");
   }
 
   async findVipMovies() {
