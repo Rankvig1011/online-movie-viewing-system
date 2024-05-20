@@ -3,7 +3,6 @@ import { Typography } from '@/components/Typhograpy';
 import React from 'react';
 
 export const InputBase = ({ label, placeholder, error, ...props }) => {
-    console.log('label', label);
     return (
         <Container tw="flex-col">
             {label && <Typography tw="text-sm">{label}</Typography>}

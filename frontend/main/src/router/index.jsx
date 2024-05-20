@@ -13,6 +13,7 @@ import { Home } from '@/pages/main/Home';
 import { AdminLayout } from '@/layouts/AdminLayout';
 import { Dashboard } from '@/pages/admin/Dashboard';
 import { Actor } from '@/pages/admin/Actor';
+import { CategoryAdminPage } from '@/pages/admin/Category';
 
 export const routerList = [
     {
@@ -42,7 +43,7 @@ export const routerList = [
             {
                 path: 'category',
                 title: 'Category',
-                element: <div>Category</div>,
+                element: <CategoryAdminPage />,
             },
             {
                 path: 'movie',

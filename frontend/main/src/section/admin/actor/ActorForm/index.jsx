@@ -5,19 +5,35 @@ import { InputBase } from '@/components/interaction/InputBase';
 import { Container } from '@/components/layout';
 import { Button } from '@mui/material';
 import { Typography } from '@/components/Typhograpy';
+import { useCreateActor, useUpdateActor } from '@/hooks/actor';
 
-export const ActorForm = ({ actorInfo }) => {
+export const ActorForm = ({ actorInfo, onClose }) => {
+    const { createActor, isPending: isCreatPending } = useCreateActor();
+    const { updateActor, isPending: isUpdatePending } = useUpdateActor();
     const [name, setName] = React.useState(actorInfo?.name || '');
     const [error, setError] = React.useState('');
     const [files, setFiles] = React.useState(actorInfo?.image || []);
     const handleSubmit = (e) => {
-        e.preventDefault();
-        if (!name) {
-            setError('Name is required');
-            return;
+        try {
+            e.preventDefault();
+            if (!name) {
+                setError('Name is required');
+                return;
+            }
+            if (actorInfo) {
+                updateActor({
+                    id: actorInfo._id,
+                    data: { id: actorInfo._id, name, image: files },
+                });
+
+                return;
+            } else {
+                createActor({ name, image: files });
+                onClose && onClose();
+            }
+        } catch (error) {
+            console.log(error);
         }
-        actorInfo ? console.log('Edit') : console.log('Add');
-        console.log({ name, images: files });
     };
 
     React.useEffect(() => {
@@ -40,7 +56,11 @@ export const ActorForm = ({ actorInfo }) => {
                     <Typography tw="text-sm">List Of Image</Typography>
                     <DropZone files={files} setFiles={setFiles} />
                 </Container>
-                <Button type="submit" variant="contained">
+                <Button
+                    type="submit"
+                    variant="contained"
+                    disabled={isCreatPending || isUpdatePending}
+                >
                     Submit
                 </Button>
             </form>
