@@ -5,7 +5,7 @@ import { userRouter } from './user.router.js';
 import { authRouter } from './auth.router.js';
 import { actorRouter } from './actor.router.js';
 
-// import data from '../dummy/fulldata.json' assert { type: 'json' };
+import data from '../dummy/fulldata.json' assert { type: 'json' };
 import episodeService from '../service/episode.service.js';
 
 export const router = (app) => {
