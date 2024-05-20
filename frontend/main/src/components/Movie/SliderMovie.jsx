@@ -63,7 +63,7 @@ const SliderMovie = (props) => {
                     )}
                     <Slider {...settings} ref={sliderRef}>
                         {moviesCategories.movies.map((movie) => (
-                            <Link to={`/movie/${movie._id}`} key={movie._id}>
+                            <Link to={`api/movie/${movie._id}`} key={movie._id}>
                                 <div
                                     className="bg-image-container"
                                     style={{
