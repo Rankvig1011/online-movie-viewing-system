@@ -1,3 +1,4 @@
+import { ResponseApp } from '../common/response.js';
 import episodeService from '../service/episode.service.js';
 import GeneralController from './general.controller.js';
 
@@ -8,11 +9,12 @@ class EpisodeController extends GeneralController {
 
     async findEpisodeByMovieId(req, res) {
         try {
-            const { movie } = req.params;
+            const { movie } = req.query;
+            console.log('movie', movie);
             const episodes = await episodeService.findEpisodeByMovieId(movie);
-            ResponseApp.ok(episodes, res);
+            ResponseApp.ok(res, episodes);
         } catch (error) {
-            ResponseApp.failed(error, res);
+            ResponseApp.failed(res, error);
         }
     }
 }

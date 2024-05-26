@@ -5,58 +5,57 @@ import { InputBase } from '@/components/interaction/InputBase';
 import { Container } from '@/components/layout';
 import { Button } from '@mui/material';
 import { Typography } from '@/components/Typhograpy';
-import { useCreateActor, useUpdateActor } from '@/hooks/actor';
 import { useForm } from 'react-hook-form';
+import { useCreateCategory, useUpdateCategory } from '@/hooks/category';
 
 export const CategoryForm = ({ categoryInfo, onClose }) => {
-    const { createActor, isPending: isCreatPending } = useCreateActor();
-    const { updateActor, isPending: isUpdatePending } = useUpdateActor();
-    // const [name, setName] = React.useState(categoryInfo?.name || '');
-    // const [error, setError] = React.useState('');
-    // const [files, setFiles] = React.useState(actorInfo?.image || []);
-    const { register } = useForm({
+    console.log('categoryInfo', categoryInfo);
+    const { createCategory, isPending: isCreatPending } = useCreateCategory();
+    const { updateCategory, isPending: isUpdatePending } = useUpdateCategory();
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm({
         defaultValues: {
             name: categoryInfo?.name || '',
             description: categoryInfo?.description || '',
         },
     });
-    const handleSubmit = (e) => {
+    const onSubmit = async (data) => {
         try {
-            e.preventDefault();
-            // if (!name) {
-            //     setError('Name is required');
-            //     return;
-            // }
-            // if (actorInfo) {
-            //     updateActor({
-            //         id: actorInfo._id,
-            //         data: { id: actorInfo._id, name, image: files },
-            //     });
+            if (categoryInfo) {
+                updateCategory({
+                    id: categoryInfo._id,
+                    data,
+                });
 
-            //     return;
-            // } else {
-            //     createActor({ name, image: files });
-            //     onClose && onClose();
-            // }
+                return;
+            } else {
+                createCategory(data);
+                onClose && onClose();
+            }
         } catch (error) {
             console.log(error);
         }
     };
 
-    // React.useEffect(() => {
-    //     setName(actorInfo?.name || '');
-    //     setFiles(actorInfo?.image || []);
-    // }, [actorInfo]);
-
     return (
         <Container tw="flex-col py-2">
-            <form tw="flex gap-2 flex-col" onSubmit={handleSubmit}>
+            <form tw="flex gap-2 flex-col" onSubmit={handleSubmit(onSubmit)}>
                 {categoryInfo && <Typography tw="text-sm">ID : {categoryInfo._id}</Typography>}
-                <InputBase label="Name" placeholder="Enter name category" {...register('name')} />
                 <InputBase
-                    label="description"
+                    label="Name"
+                    placeholder="Enter name category"
+                    {...register('name', { required: 'Name is required' })}
+                    error={errors.name?.message}
+                />
+                <InputBase
+                    multiline
+                    label="Description"
                     placeholder="Enter description"
-                    {...register('description')}
+                    {...register('description', { required: 'Description is required' })}
+                    error={errors.description?.message}
                 />
 
                 <Button
@@ -70,4 +69,3 @@ export const CategoryForm = ({ categoryInfo, onClose }) => {
         </Container>
     );
 };
-``

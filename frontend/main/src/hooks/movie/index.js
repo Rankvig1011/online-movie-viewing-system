@@ -1,7 +1,8 @@
 import { appContainer } from '@/service/container';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { Bounce, toast } from 'react-toastify';
 
-const { movieService } = appContainer.cradle;
+const { movieService, episodeService } = appContainer.cradle;
 
 const getMovies = movieService.get.bind(movieService);
 export const useMovie = () => {
@@ -15,6 +16,7 @@ export const useMovie = () => {
         isError: error,
     };
 };
+<<<<<<< Updated upstream
 const getMoviesId = movieService.getById.bind(movieService);
 export const useMovieDetail = (id) => {
     const { data, isPending, error } = useQuery({
@@ -25,7 +27,75 @@ export const useMovieDetail = (id) => {
     });
     return {
         movie: data?.results || [],
+=======
+
+export const useDeleteMovie = () => {
+    const queryClient = useQueryClient();
+    const deleteMovie = movieService.delete.bind(movieService);
+    const { mutate, isPending } = useMutation({
+        mutationFn: deleteMovie,
+        onSuccess: () => {
+            queryClient.invalidateQueries('/movie');
+            toast.success('Delete successfully!!!', {
+                position: 'bottom-right',
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: 'light',
+                transition: Bounce,
+            });
+        },
+    });
+
+    return {
+        deleteMovie: mutate,
+        isPending,
+    };
+};
+
+const getEpisodesByMovieId = episodeService.getEpisodeByMovieId.bind(episodeService);
+export const useEpisodes = (movieId) => {
+    const { data, isPending, error } = useQuery({
+        queryKey: ['episode', movieId],
+        queryFn: async () => getEpisodesByMovieId(movieId),
+    });
+    return {
+        episodes: data?.results || [],
+>>>>>>> Stashed changes
         isLoading: isPending,
         isError: error,
     };
 };
+<<<<<<< Updated upstream
+=======
+
+const deleteEpisode = episodeService.delete.bind(episodeService);
+export const useDeleteEpisode = () => {
+    const queryClient = useQueryClient();
+    const { mutate, isPending } = useMutation({
+        mutationFn: deleteEpisode,
+        onSuccess: () => {
+            queryClient.invalidateQueries('/episode');
+            toast.success('Delete successfully!!!', {
+                position: 'bottom-right',
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: 'light',
+                transition: Bounce,
+            });
+        },
+    });
+
+    return {
+        deleteEpisode: mutate,
+        isPending,
+    };
+};
+>>>>>>> Stashed changes

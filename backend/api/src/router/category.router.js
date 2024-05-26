@@ -6,10 +6,10 @@ const router = express.Router();
 
 router.get('/', categoryController.find);
 router.get('/:id', categoryController.findById);
-router.use(middleware.authenticate);
-router.use(middleware.authorizeForAdmin);
+// router.use(middleware.authenticate);
+// router.use(middleware.authorizeForAdmin);
 router.post('/', categoryController.create);
-router.put('/:id', categoryController.update);
+router.patch('/:id', categoryController.update);
 router.delete('/:id', categoryController.delete);
 
 export const categoryRouter = router;

@@ -1,13 +1,20 @@
+import React from 'react';
 import { Container } from '@/components/layout';
 import { Typography } from '@/components/Typhograpy';
-import React from 'react';
 
-export const InputBase = ({ label, placeholder, error, ...props }) => {
-    return (
-        <Container tw="flex-col">
-            {label && <Typography tw="text-sm">{label}</Typography>}
-            <input placeholder={placeholder} tw="border mb-5 p-2" {...props} />
-            {error && <Typography tw="text-danger text-sm">{error}</Typography>}
-        </Container>
-    );
-};
+export const InputBase = React.forwardRef(
+    ({ label, placeholder, error, multiline, ...props }, ref) => {
+        return (
+            <Container tw="flex-col">
+                {label && <Typography tw="text-sm">{label}</Typography>}
+                {multiline ? (
+                    <textarea placeholder={placeholder} tw="border mb-2 p-2" {...props} ref={ref} />
+                ) : (
+                    <input placeholder={placeholder} tw="border mb-2 p-2" {...props} ref={ref} />
+                )}
+                {error && <Typography tw="text-danger !text-xs">{error}</Typography>}
+            </Container>
+        );
+    }
+);
+InputBase.displayName = 'InputBase';
