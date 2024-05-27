@@ -1,20 +1,20 @@
 import { appContainer } from '@/service/container';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 
-const { authLoginService } = appContainer.cradle;
+const { authRegisterService } = appContainer.cradle;
 
-export const useLogin = () => {
+export const useRegister = () => {
     const queryClient = useQueryClient();
-    const login = authLoginService.post.bind(authLoginService);
+    const register = authRegisterService.post.bind(authRegisterService);
     const { data, mutate, isPending } = useMutation({
-        mutationFn: login,
+        mutationFn: register,
         onSuccess: () => {
             queryClient.invalidateQueries('/');
         },
     });
     return {
-        dataLogin: data?.results || [],
-        login: mutate,
+        dataRegister: data?.results || [],
+        register: mutate,
         isPending: isPending,
     };
 };

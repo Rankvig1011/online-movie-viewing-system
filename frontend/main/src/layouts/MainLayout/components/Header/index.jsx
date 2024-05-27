@@ -12,6 +12,8 @@ import MenuItem from '@mui/material/MenuItem';
 import Drawer from '@mui/material/Drawer';
 import MenuIcon from '@mui/icons-material/Menu';
 import Logo from '@/assets/images/logo.png';
+import Menu from '@mui/material/Menu';
+import Fade from '@mui/material/Fade';
 import { Link, useNavigate } from 'react-router-dom';
 const logoStyle = {
     width: '80px',
@@ -21,11 +23,20 @@ const logoStyle = {
 
 export const Header = () => {
     const [open, setOpen] = useState(false);
+    const [anchorEl, setAnchorEl] = useState(null);
+    const openMenu = Boolean(anchorEl);
+    const handleClickOpenOption = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+    const handleClickCloseOption = () => {
+        setAnchorEl(null);
+    };
     const navigate = useNavigate();
     const toggleDrawer = (newOpen) => () => {
         setOpen(newOpen);
     };
-
+    const profileLocal = localStorage.getItem('profile');
+    const profileLocalParse = JSON.parse(profileLocal);
     const scrollToSection = (sectionId) => {
         const sectionElement = document.getElementById(sectionId);
         const offset = 128;
@@ -39,14 +50,21 @@ export const Header = () => {
             setOpen(false);
         }
     };
-    //login
-    const handleClickLogin = () => {
+    const handleClickLogout = () => {
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('role');
+        localStorage.removeItem('profile');
+        handleClickCloseOption();
         navigate('/auth/login');
     };
-    //register
-    const handleClickRegister = () => {
-        navigate('/auth/register');
-    };
+    // //login
+    // const handleClickLogin = () => {
+    //     navigate('/auth/login');
+    // };
+    // //register
+    // const handleClickRegister = () => {
+    //     navigate('/auth/register');
+    // };
     return (
         <AppBar
             position="fixed"
@@ -143,20 +161,23 @@ export const Header = () => {
                             size="small"
                             component="a"
                             target="_blank"
-                            onClick={handleClickLogin}
+                            onClick={handleClickOpenOption}
                         >
-                            Đăng nhập
+                            {profileLocalParse.name}
                         </Button>
-                        <Button
-                            color="primary"
-                            variant="contained"
-                            size="small"
-                            component="a"
-                            target="_blank"
-                            onClick={handleClickRegister}
+                        <Menu
+                            id="fade-menu"
+                            MenuListProps={{
+                                'aria-labelledby': 'fade-button',
+                            }}
+                            anchorEl={anchorEl}
+                            open={openMenu}
+                            onClose={handleClickCloseOption}
+                            TransitionComponent={Fade}
                         >
-                            Đăng ký
-                        </Button>
+                            <MenuItem onClick={handleClickCloseOption}>Thông tin</MenuItem>
+                            <MenuItem onClick={handleClickLogout}>Đăng xuất</MenuItem>
+                        </Menu>
                     </Box>
                     <Box sx={{ display: { sm: '', md: 'none' } }}>
                         <Button
@@ -207,21 +228,27 @@ export const Header = () => {
                                         variant="contained"
                                         component="a"
                                         sx={{ width: '100%' }}
-                                        onClick={handleClickLogin}
+                                        onClick={handleClickOpenOption}
                                     >
-                                        Đăng nhập
+                                        {profileLocalParse.name}
                                     </Button>
                                 </MenuItem>
                                 <MenuItem>
-                                    <Button
-                                        color="primary"
-                                        variant="outlined"
-                                        component="a"
-                                        sx={{ width: '100%' }}
-                                        onClick={handleClickRegister}
+                                    <Menu
+                                        id="fade-menu"
+                                        MenuListProps={{
+                                            'aria-labelledby': 'fade-button',
+                                        }}
+                                        anchorEl={anchorEl}
+                                        open={openMenu}
+                                        onClose={handleClickCloseOption}
+                                        TransitionComponent={Fade}
                                     >
-                                        Đăng ký
-                                    </Button>
+                                        <MenuItem onClick={handleClickCloseOption}>
+                                            Thông tin
+                                        </MenuItem>
+                                        <MenuItem onClick={handleClickLogout}>Đăng xuất</MenuItem>
+                                    </Menu>
                                 </MenuItem>
                             </Box>
                         </Drawer>
