@@ -54,7 +54,7 @@ export const Header = () => {
                 boxShadow: 0,
                 bgcolor: 'transparent',
                 backgroundImage: 'none',
-                mt: 2,
+                // mt: 2,
             }}
         >
             <Container maxWidth="xl">
@@ -110,14 +110,6 @@ export const Header = () => {
                                         Thể loại
                                     </Typography>
                                 </Link>
-                            </MenuItem>
-                            <MenuItem
-                                onClick={() => scrollToSection('Thịnh hành')}
-                                sx={{ py: '6px', px: '12px' }}
-                            >
-                                <Typography variant="body2" color="text.primary">
-                                    Thịnh hành
-                                </Typography>
                             </MenuItem>
                             <MenuItem
                                 onClick={() => scrollToSection('Thông tin')}
@@ -203,9 +195,6 @@ export const Header = () => {
                                 </MenuItem>
                                 <MenuItem onClick={() => scrollToSection('Thể loại')}>
                                     <Link to={`/category`}>Thể loại</Link>
-                                </MenuItem>
-                                <MenuItem onClick={() => scrollToSection('Thịnh hành')}>
-                                    Thịnh hành
                                 </MenuItem>
                                 <MenuItem onClick={() => scrollToSection('Thông tin')}>
                                     Thông tin
