@@ -13,6 +13,15 @@ export const CategoryAdminPage = () => {
     const handleOpenAddNewCategory = () => setIsOpenAddNewCategory(true);
     const handleCloseAddNewCategory = () => setIsOpenAddNewCategory(false);
 
+    React.useEffect(() => {
+        if (categories.length > 0 && editCategoryInfo) {
+            const foundCategory = categories.find((item) => item._id === editCategoryInfo._id);
+            if (!foundCategory) {
+                setEditCategoryInfo();
+            }
+        }
+    }, [categories, editCategoryInfo]);
+
     return (
         <>
             <Container tw="flex-col p-4 gap-2">
@@ -30,7 +39,7 @@ export const CategoryAdminPage = () => {
                     </Container>
                     {editCategoryInfo && (
                         <Container tw="border w-full xl:w-1/2 p-2">
-                            <CategoryForm actorInfo={editCategoryInfo} />
+                            <CategoryForm categoryInfo={editCategoryInfo} />
                         </Container>
                     )}
                 </Container>

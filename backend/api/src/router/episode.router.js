@@ -4,9 +4,8 @@ import middleware from '../middleware/index.js';
 
 const router = express.Router();
 
-router.get('/', episodeController.find);
+router.get('/', episodeController.findEpisodeByMovieId);
 router.get('/:id', episodeController.findById);
-router.get('/?movie=:id', episodeController.findEpisodeByMovieId);
 router.use(middleware.authenticate);
 router.use(middleware.authorizeForAdmin);
 router.post('/', episodeController.create);

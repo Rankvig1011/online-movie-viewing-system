@@ -1,3 +1,4 @@
+import axiosClient from '@/config';
 import { GenaralService } from './general';
 
 export class EpisodeService extends GenaralService {
@@ -6,6 +7,6 @@ export class EpisodeService extends GenaralService {
     }
 
     async getEpisodeByMovieId(movieId) {
-        return await this.get(`/episode?movie=${movieId}`);
+        return await axiosClient.get(`/episode?movie=${movieId}`);
     }
 }
