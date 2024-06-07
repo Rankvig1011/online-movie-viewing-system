@@ -16,19 +16,20 @@ export const useMovie = () => {
         isError: error,
     };
 };
-<<<<<<< Updated upstream
 const getMoviesId = movieService.getById.bind(movieService);
 export const useMovieDetail = (id) => {
     const { data, isPending, error } = useQuery({
         queryKey: ['movie', id],
-        queryFn: () => {
-            getMoviesId(id);
+        queryFn: async () => {
+            return getMoviesId(id);
         },
     });
     return {
-        movie: data?.results || [],
-=======
-
+        movieData: data?.results || [],
+        isLoading: isPending,
+        isError: error,
+    };
+};
 export const useDeleteMovie = () => {
     const queryClient = useQueryClient();
     const deleteMovie = movieService.delete.bind(movieService);
@@ -55,7 +56,6 @@ export const useDeleteMovie = () => {
         isPending,
     };
 };
-
 const getEpisodesByMovieId = episodeService.getEpisodeByMovieId.bind(episodeService);
 export const useEpisodes = (movieId) => {
     const { data, isPending, error } = useQuery({
@@ -64,14 +64,10 @@ export const useEpisodes = (movieId) => {
     });
     return {
         episodes: data?.results || [],
->>>>>>> Stashed changes
         isLoading: isPending,
         isError: error,
     };
 };
-<<<<<<< Updated upstream
-=======
-
 const deleteEpisode = episodeService.delete.bind(episodeService);
 export const useDeleteEpisode = () => {
     const queryClient = useQueryClient();
@@ -98,4 +94,3 @@ export const useDeleteEpisode = () => {
         isPending,
     };
 };
->>>>>>> Stashed changes

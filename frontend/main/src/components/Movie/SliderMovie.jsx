@@ -35,76 +35,81 @@ const SliderMovie = (props) => {
     };
     return (
         <>
-            <Typography
-                component="h4"
-                variant="h5"
-                color="inherit"
-                gutterBottom
-                key={moviesCategories._id}
-                sx={{
-                    padding: '10px 20px 10px 20px',
-                    textAlign: 'left',
-                    backgroundColor: '#f5f5f5',
-                    borderRadius: '10px',
-                    flexShrink: 0,
-                    mt: 4,
-                    borderBottom: '2px solid transparent',
-                    '&:hover': { borderBottom: '2px solid #f50057' },
-                }}
-            >
-                {moviesCategories.name}
-            </Typography>
-            <div className="container-slider">
-                <Container maxWidth="xl" className="slider">
-                    {screenType !== 'MOBILE' && (
-                        <div onClick={() => sliderRef.current.slickPrev()} className="prev">
-                            <KeyboardArrowLeftIcon style={{ fontSize: 30 }} />
-                        </div>
-                    )}
-                    <Slider {...settings} ref={sliderRef}>
-                        {moviesCategories.movies.map((movie) => (
-                            <Link to={`api/movie/${movie._id}`} key={movie._id}>
-                                <div
-                                    className="bg-image-container"
-                                    style={{
-                                        ...styleImg,
-                                        backgroundImage:
-                                            screenType !== 'MOBILE'
-                                                ? `url(${movie.imageH})`
-                                                : `url(${movie.image})`,
-                                    }}
-                                >
-                                    <div className="gradient">
-                                        <div className="text-container">
-                                            <BoxField
-                                                sx={{
-                                                    display: 'flex',
-                                                }}
-                                            >
-                                                <ThumbUpOutlined />
-                                                <Typography
-                                                    variant="body2"
-                                                    component="p"
-                                                    color="inherit"
-                                                >
-                                                    {movie?.totalVote}
-                                                </Typography>
-                                            </BoxField>
-                                            <div className="label">{movie.durationStr}</div>
-                                            <div className="body">{movie.name}</div>
-                                        </div>
-                                    </div>
+            {' '}
+            {moviesCategories && (
+                <>
+                    <Typography
+                        component="h4"
+                        variant="h5"
+                        color="inherit"
+                        gutterBottom
+                        key={moviesCategories?._id}
+                        sx={{
+                            padding: '10px 20px 10px 20px',
+                            textAlign: 'left',
+                            backgroundColor: '#f5f5f5',
+                            borderRadius: '10px',
+                            flexShrink: 0,
+                            mt: 4,
+                            borderBottom: '2px solid transparent',
+                            '&:hover': { borderBottom: '2px solid #f50057' },
+                        }}
+                    >
+                        {moviesCategories?.name}
+                    </Typography>
+                    <div className="container-slider">
+                        <Container maxWidth="xl" className="slider">
+                            {screenType !== 'MOBILE' && (
+                                <div onClick={() => sliderRef.current.slickPrev()} className="prev">
+                                    <KeyboardArrowLeftIcon style={{ fontSize: 30 }} />
                                 </div>
-                            </Link>
-                        ))}
-                    </Slider>
-                    {screenType !== 'MOBILE' && (
-                        <div onClick={() => sliderRef.current.slickNext()} className="next">
-                            <KeyboardArrowRightIcon style={{ fontSize: 30 }} />
-                        </div>
-                    )}
-                </Container>
-            </div>
+                            )}
+                            <Slider {...settings} ref={sliderRef}>
+                                {moviesCategories?.movies?.map((movie) => (
+                                    <Link to={`/watch/${movie._id}`} key={movie._id}>
+                                        <div
+                                            className="bg-image-container"
+                                            style={{
+                                                ...styleImg,
+                                                backgroundImage:
+                                                    screenType !== 'MOBILE'
+                                                        ? `url(${movie.imageH})`
+                                                        : `url(${movie.image})`,
+                                            }}
+                                        >
+                                            <div className="gradient">
+                                                <div className="text-container">
+                                                    <BoxField
+                                                        sx={{
+                                                            display: 'flex',
+                                                        }}
+                                                    >
+                                                        <ThumbUpOutlined />
+                                                        <Typography
+                                                            variant="body2"
+                                                            component="p"
+                                                            color="inherit"
+                                                        >
+                                                            {movie?.totalVote}
+                                                        </Typography>
+                                                    </BoxField>
+                                                    <div className="label">{movie.durationStr}</div>
+                                                    <div className="body">{movie.name}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </Link>
+                                ))}
+                            </Slider>
+                            {screenType !== 'MOBILE' && (
+                                <div onClick={() => sliderRef.current.slickNext()} className="next">
+                                    <KeyboardArrowRightIcon style={{ fontSize: 30 }} />
+                                </div>
+                            )}
+                        </Container>
+                    </div>
+                </>
+            )}
         </>
     );
 };

@@ -5,7 +5,9 @@ import { EpisodeService } from './episode';
 import { CommonService } from './common';
 import { ActorService } from './actor';
 import { WatchService } from './watch';
-
+import { AuthLoginService } from './authLogin';
+import { ProfileService } from './profile';
+import { AuthRegisterService } from './authRegister';
 export const appContainer = awilix.createContainer();
 
 appContainer.register({
@@ -15,4 +17,7 @@ appContainer.register({
     commonService: awilix.asClass(CommonService).singleton(),
     actorService: awilix.asClass(ActorService).singleton(),
     watchService: awilix.asClass(WatchService).singleton(),
+    authLoginService: awilix.asClass(AuthLoginService).singleton(),
+    profileService: awilix.asClass(ProfileService).singleton(),
+    authRegisterService: awilix.asClass(AuthRegisterService).singleton(),
 });

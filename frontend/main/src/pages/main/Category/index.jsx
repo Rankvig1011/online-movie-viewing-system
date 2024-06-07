@@ -12,10 +12,11 @@ export const Category = () => {
         const newMoviesCategories = categories.map((category) => {
             return {
                 ...category,
-                movies: movies.filter((movie) => movie.category === category._id),
+                movies: movies.filter((movie) => movie.category._id === category._id),
             };
         });
         setMoviesCategories(newMoviesCategories);
+        console.log('newMoviesCategories', newMoviesCategories);
     }, [categories, movies]);
     return (
         <Container

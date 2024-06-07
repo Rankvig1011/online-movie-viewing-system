@@ -9,7 +9,6 @@ import { useForm } from 'react-hook-form';
 import { useCreateCategory, useUpdateCategory } from '@/hooks/category';
 
 export const CategoryForm = ({ categoryInfo, onClose }) => {
-    console.log('categoryInfo', categoryInfo);
     const { createCategory, isPending: isCreatPending } = useCreateCategory();
     const { updateCategory, isPending: isUpdatePending } = useUpdateCategory();
     const {

@@ -3,7 +3,7 @@ import CssBaseline from '@mui/material/CssBaseline';
 import BoxField from '@/components/Forms/BoxField/BoxField';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import Link from '@mui/material/Link';
+import { Link } from 'react-router-dom';
 import Stack from '@mui/material/Stack';
 import CustomTextField from '@/components/Forms/TextField/CustomTextField';
 import CustomButton from '@/components/Atom/CustomButton/CustomButton';
@@ -16,9 +16,9 @@ function Copyright() {
     return (
         <Typography variant="body2" color="text.secondary">
             {'Copyright © '}
-            <Link color="inherit" href="#">
+            <Typography color="inherit" href="#">
                 Xem Phim
-            </Link>{' '}
+            </Typography>{' '}
             {new Date().getFullYear()}
             {'.'}
         </Typography>
@@ -107,21 +107,14 @@ export const Footer = () => {
                                 gap: 1,
                             }}
                         >
-                            <Link color="text.secondary" href="#">
-                                Trang chủ
+                            <Link to={`/`}>
+                                <Typography color="text.secondary">Trang chủ</Typography>
                             </Link>
-                            <Link color="text.secondary" href="#">
-                                Thể loại
+                            <Link to={`/category`}>
+                                <Typography color="text.secondary">Thể loại</Typography>
                             </Link>
-                            <Link color="text.secondary" href="#">
-                                Thịnh hành
-                            </Link>
-                            <Link color="text.secondary" href="#">
-                                Thông tin
-                            </Link>
-                            <Link color="text.secondary" href="#">
-                                FAQs
-                            </Link>
+                            <Typography color="text.secondary">Thông tin</Typography>
+                            {/* <Typography color="text.secondary">FAQs</Typography> */}
                         </BoxField>
                     </BoxField>
                 </Container>
