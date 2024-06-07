@@ -114,7 +114,7 @@ export const Footer = () => {
                                 <Typography color="text.secondary">Thể loại</Typography>
                             </Link>
                             <Typography color="text.secondary">Thông tin</Typography>
-                            <Typography color="text.secondary">FAQs</Typography>
+                            {/* <Typography color="text.secondary">FAQs</Typography> */}
                         </BoxField>
                     </BoxField>
                 </Container>

@@ -8,7 +8,7 @@ const Results = (props) => {
     const [isArrMovies, setNewArrMovies] = useState([]);
     useEffect(() => {
         if (category) {
-            const newArrMovies = movies.filter((movie) => movie.category === category);
+            const newArrMovies = movies.filter((movie) => movie.category._id === category);
             setNewArrMovies(newArrMovies);
         } else {
             setNewArrMovies(movies);

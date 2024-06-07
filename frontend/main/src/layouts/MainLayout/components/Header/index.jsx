@@ -137,14 +137,14 @@ export const Header = () => {
                                     Thông tin
                                 </Typography>
                             </MenuItem>
-                            <MenuItem
+                            {/* <MenuItem
                                 onClick={() => scrollToSection('faq')}
                                 sx={{ py: '6px', px: '12px' }}
                             >
                                 <Typography variant="body2" color="text.primary">
                                     FAQ
                                 </Typography>
-                            </MenuItem>
+                            </MenuItem> */}
                         </Box>
                     </Box>
                     <Box
@@ -175,7 +175,7 @@ export const Header = () => {
                             onClose={handleClickCloseOption}
                             TransitionComponent={Fade}
                         >
-                            <MenuItem onClick={handleClickCloseOption}>Thông tin</MenuItem>
+                            {/* <MenuItem onClick={handleClickCloseOption}>Thông tin</MenuItem> */}
                             <MenuItem onClick={handleClickLogout}>Đăng xuất</MenuItem>
                         </Menu>
                     </Box>
@@ -220,7 +220,7 @@ export const Header = () => {
                                 <MenuItem onClick={() => scrollToSection('Thông tin')}>
                                     Thông tin
                                 </MenuItem>
-                                <MenuItem onClick={() => scrollToSection('faq')}>FAQ</MenuItem>
+                                {/* <MenuItem onClick={() => scrollToSection('faq')}>FAQ</MenuItem> */}
                                 <Divider />
                                 <MenuItem>
                                     <Button

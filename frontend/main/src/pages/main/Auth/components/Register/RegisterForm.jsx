@@ -108,7 +108,7 @@ export const RegisterForm = (props) => {
                                             required
                                             fullWidth
                                             id="name"
-                                            label="Tên đăng nhập"
+                                            label="Tên tài khoản"
                                             name="name"
                                             // validator={nameValidator}
                                             autoComplete="name"
