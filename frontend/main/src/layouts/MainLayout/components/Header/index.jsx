@@ -14,6 +14,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Logo from '@/assets/images/logo.png';
 import Menu from '@mui/material/Menu';
 import Fade from '@mui/material/Fade';
+import Avatar from '@mui/material/Avatar';
 import { Link, useNavigate } from 'react-router-dom';
 const logoStyle = {
     width: '80px',
@@ -163,6 +164,7 @@ export const Header = () => {
                             target="_blank"
                             onClick={handleClickOpenOption}
                         >
+                            <Avatar alt="Remy Sharp" src={profileLocalParse?.imgUser || ''} sx={{mr:1}}/>
                             {profileLocalParse.name}
                         </Button>
                         <Menu
