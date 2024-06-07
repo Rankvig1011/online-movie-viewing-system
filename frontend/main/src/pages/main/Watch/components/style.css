@@ -1,0 +1,33 @@
+.container-slider {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.slider {
+    position: relative;
+    width: 100%;
+}
+.prev {
+    position: absolute;
+    top: 150px;
+    left: -20px;
+    transform: translateY(-50%);
+    z-index: 10;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+}
+.next {
+    position: absolute;
+    top: 150px;
+    right: -20px;
+    transform: translateY(-50%);
+    z-index: 10;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    border-radius: 50%;
+}
+.bg-image-container:hover {
+    filter: grayscale(100%);
+}

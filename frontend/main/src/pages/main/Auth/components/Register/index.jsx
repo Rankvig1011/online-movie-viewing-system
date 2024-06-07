@@ -11,9 +11,7 @@ export const Register = () => {
     const navigate = useNavigate();
     useEffect(() => {
         if (dataRegister?.access_token) {
-            console.log(dataRegister.access_token);
             localStorage.setItem('access_token', dataRegister.access_token);
-            console.log('dataLogin?.access_token:', dataRegister?.access_token);
             profile(dataRegister?.access_token);
         }
     }, [dataRegister, profile]);
@@ -21,7 +19,7 @@ export const Register = () => {
         if (dataProfile?.role === 'admin') {
             localStorage.setItem('role', 'admin');
             localStorage.setItem('profile', JSON.stringify(dataProfile));
-            navigate('/admin');
+            navigate('/admin/dashboard');
         } else if (dataProfile?.role === 'user') {
             localStorage.setItem('role', 'user');
             localStorage.setItem('profile', JSON.stringify(dataProfile));
@@ -30,7 +28,7 @@ export const Register = () => {
     }, [dataProfile, navigate]);
     const useHandleSubmit = async (dataPayload) => {
         setLoading(true);
-        console.log(dataPayload);
+
         register(dataPayload);
         setLoading(false);
     };

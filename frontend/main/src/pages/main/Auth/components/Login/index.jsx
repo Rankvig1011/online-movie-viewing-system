@@ -11,9 +11,7 @@ export const Login = () => {
     const navigate = useNavigate();
     useEffect(() => {
         if (dataLogin?.access_token) {
-            console.log(dataLogin.access_token);
             localStorage.setItem('access_token', dataLogin.access_token);
-            console.log('dataLogin?.access_token:', dataLogin?.access_token);
             profile(dataLogin?.access_token);
         }
     }, [dataLogin, profile]);
@@ -21,7 +19,7 @@ export const Login = () => {
         if (dataProfile?.role === 'admin') {
             localStorage.setItem('role', 'admin');
             localStorage.setItem('profile', JSON.stringify(dataProfile));
-            navigate('/admin');
+            navigate('/admin/dashboard');
         } else if (dataProfile?.role === 'user') {
             localStorage.setItem('role', 'user');
             localStorage.setItem('profile', JSON.stringify(dataProfile));
