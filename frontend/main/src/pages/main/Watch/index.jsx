@@ -8,6 +8,7 @@ import { useMovie, useEpisodes } from '@/hooks/movie';
 import SliderMovie from '@/components/Movie/SliderMovie';
 import BoxEpisode from './components/BoxEpisode';
 import CardMedia from './components/CardMedia';
+import Comment from './components/Comment';
 export const Watch = () => {
     const { id } = useParams();
     const { movies } = useMovie();
@@ -79,6 +80,7 @@ export const Watch = () => {
                     )}
                     <BoxImgActor movieData={movieData} />
                     <SliderMovie moviesCategories={moviesCategories} />
+                    <Comment />
                 </Container>
             </main>
         </>
