@@ -6,10 +6,10 @@ const router = express.Router();
 
 router.get('/', movieController.find);
 router.get('/:id', movieController.findById);
-router.use(middleware.authenticate);
-router.use(middleware.authorizeForAdmin);
+// router.use(middleware.authenticate);
+// router.use(middleware.authorizeForAdmin);
 router.post('/', movieController.create);
-router.put('/:id', movieController.update);
+router.patch('/:id', movieController.update);
 router.delete('/:id', movieController.delete);
 
 export const movieRouter = router;

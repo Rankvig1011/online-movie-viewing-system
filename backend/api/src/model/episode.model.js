@@ -5,7 +5,7 @@ const Schema = mongoose.Schema;
 
 const Episode = new Schema(
     {
-        name: { type: String, required: true },
+        name: { type: String },
         link: { type: String },
         movie: { type: Schema.Types.ObjectId, ref: 'Movie' },
         duration: { type: Number },

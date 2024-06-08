@@ -7,7 +7,7 @@ const Movie = new Schema(
     {
         name: { type: String, required: true },
         description: { type: String, required: true },
-        slug: { type: String, required: true },
+        slug: { type: String },
         image: { type: String },
         imageH: { type: String },
         trailer: { type: String },

@@ -10,9 +10,9 @@ class MovieController extends GeneralController {
     async findVipMovies(req, res) {
         try {
             const movies = await movieService.findVipMovies();
-            ResponseApp.ok(movies, res);
+            ResponseApp.ok(res, movies);
         } catch (error) {
-            ResponseApp.failed(error, res);
+            ResponseApp.failed(res, error);
         }
     }
 
@@ -20,27 +20,27 @@ class MovieController extends GeneralController {
         try {
             const { file } = req;
             const result = await movieService.findByImage(file);
-            ResponseApp.ok(result, res);
+            ResponseApp.ok(res, result);
         } catch (error) {
-            ResponseApp.failed(error, res);
+            ResponseApp.failed(res, error);
         }
     }
 
     async findTopViewByCategory(req, res) {
         try {
             const movies = await movieService.findTopViewByCategory();
-            ResponseApp.ok(movies, res);
+            ResponseApp.ok(res, movies);
         } catch (error) {
-            ResponseApp.failed(error, res);
+            ResponseApp.failed(res, error);
         }
     }
 
     async findTopView(req, res) {
         try {
             const movies = await movieService.findTopView();
-            ResponseApp.ok(movies, res);
+            ResponseApp.ok(res, movies);
         } catch (error) {
-            ResponseApp.failed(error, res);
+            ResponseApp.failed(res, error);
         }
     }
 }
