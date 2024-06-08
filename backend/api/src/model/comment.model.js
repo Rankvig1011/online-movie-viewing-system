@@ -16,7 +16,7 @@ const Reply = new Schema({
 
 const Interaction = new Schema({
     user: { type: Schema.Types.ObjectId, ref: 'User' },
-    type: { type: string },
+    type: { type: String },
 });
 
 const Comment = new Schema(

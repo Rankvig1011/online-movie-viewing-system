@@ -1,6 +1,6 @@
-import commentModel from '../model/comment.model';
+import commentModel from '../model/comment.model.js';
 import GeneralService from './general.service.js';
-import userModel from '../model/user.model';
+import userModel from '../model/user.model.js';
 
 class CommentService extends GeneralService {
     constructor() {
