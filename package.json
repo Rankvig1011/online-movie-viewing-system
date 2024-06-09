@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "server": "cd backend && yarn dev",
+    "server": "cd backend && yarn api",
     "client": "cd frontend && cd main && yarn dev",
     "install": "concurrently \"cd backend && yarn install\" \"cd frontend && yarn install\"",
     "dev": "concurrently \"yarn server\" \"yarn client\""

@@ -7,12 +7,12 @@ import { Typography } from '@/components/Typhograpy';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { Box } from '@mui/material';
 
-export const DropZone = ({ files = [], setFiles }) => {
+export const DropZone = ({ files = [], setFiles, isSingle = false }) => {
     const onDrop = React.useCallback(
         (acceptedFiles) => {
-            setFiles([...files, ...acceptedFiles]);
+            isSingle ? setFiles(acceptedFiles) : setFiles([...files, ...acceptedFiles]);
         },
-        [files, setFiles]
+        [files, setFiles, isSingle]
     );
     const { getRootProps, getInputProps } = useDropzone({ onDrop });
     const previews = files.map((file, index) => {

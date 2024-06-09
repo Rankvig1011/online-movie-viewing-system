@@ -6,7 +6,7 @@ import { Container, Grid } from '@/components/layout';
 import { useDeleteMovie } from '@/hooks/movie';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import { Pagination } from '@mui/material';
+import { Avatar, Pagination, Tooltip } from '@mui/material';
 import React from 'react';
 import tw from 'twin.macro';
 
@@ -115,7 +115,22 @@ export const ListOfMovie = ({ movies, setEditMovieInfo, isMovieActive, setMovieA
                         <Grid.Col tw="col-span-2 flex items-center">
                             <TextCustom>{movie.category.name}</TextCustom>
                         </Grid.Col>
-                        {isMovieActive && <Grid.Col tw="col-span-3 flex items-center"></Grid.Col>}
+                        {isMovieActive && (
+                            <Grid.Col tw="col-span-3 flex items-center">
+                                {movie.actors.map((actor, index) => (
+                                    <Tooltip label={actor.name} key={index}>
+                                        <Avatar
+                                            title={actor.name}
+                                            radius="xl"
+                                            tw="border-2 border-white border-solid !w-8 !h-8 shadow-md duration-200 hover:(scale-105)"
+                                            css={[index !== 0 && tw`-ml-4`]}
+                                            alt=""
+                                            src={actor?.image[0]}
+                                        />
+                                    </Tooltip>
+                                ))}
+                            </Grid.Col>
+                        )}
                         {!isMovieActive && (
                             <Grid.Col tw="col-span-1 flex justify-center items-center">
                                 <TextCustom>{movie.isVip.toString()}</TextCustom>

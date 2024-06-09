@@ -11,14 +11,11 @@ export class GenaralService {
         return axiosClient.get(`${this.url}/${id}`);
     }
     async post(data) {
-        return axiosClient.post(this.url, data, {
-            headers: { 'Content-Type': 'multipart/form-data' },
-        });
+        console.log('data', data);
+        return axiosClient.post(this.url, data);
     }
     async patch({ id, data }) {
-        return axiosClient.patch(`${this.url}/${id}`, data, {
-            headers: { 'Content-Type': 'multipart/form-data' },
-        });
+        return axiosClient.patch(`${this.url}/${id}`, data);
     }
     async delete(id) {
         return axiosClient.delete(`${this.url}/${id}`);

@@ -12,6 +12,7 @@ const CustomStyles = createGlobalStyle`
 
 export const GlobalStyles = ({ children }) => {
     const themes = createTheme({
+        fontFamily: 'Times New Roman',
         palette: {
             primary: {
                 main: '#1a202c',

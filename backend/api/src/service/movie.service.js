@@ -3,6 +3,7 @@ import GeneralService from './general.service.js';
 import commonService from './common.service.js';
 import categoryService from './category.service.js';
 import axios from 'axios';
+import { createSlug } from '../common/index.js';
 
 class MovieService extends GeneralService {
     commonService = commonService;
