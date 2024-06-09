@@ -30,6 +30,33 @@ export const useMovieDetail = (id) => {
         isError: error,
     };
 };
+export const useUpdateMovie = () => {
+    const queryClient = useQueryClient();
+    const updateMovie = movieService.patch.bind(movieService);
+    const { mutate, isPending } = useMutation({
+        mutationFn: updateMovie,
+        onSuccess: () => {
+            queryClient.invalidateQueries('/movie');
+            toast.success('Update successfully!!!', {
+                position: 'bottom-right',
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: 'light',
+                transition: Bounce,
+            });
+        },
+    });
+
+    return {
+        updateMovie: mutate,
+        isPending,
+    };
+};
+
 export const useDeleteMovie = () => {
     const queryClient = useQueryClient();
     const deleteMovie = movieService.delete.bind(movieService);
@@ -91,6 +118,87 @@ export const useDeleteEpisode = () => {
 
     return {
         deleteEpisode: mutate,
+        isPending,
+    };
+};
+
+export const useCreateEpisode = () => {
+    const queryClient = useQueryClient();
+    const createEpisode = episodeService.post.bind(episodeService);
+    const { mutate, isPending } = useMutation({
+        mutationFn: createEpisode,
+        onSuccess: () => {
+            queryClient.invalidateQueries('/episode');
+            toast.success('Create successfully!!!', {
+                position: 'bottom-right',
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: 'light',
+                transition: Bounce,
+            });
+        },
+    });
+
+    return {
+        createEpisode: mutate,
+        isPending,
+    };
+};
+
+export const useUpdateEpisode = () => {
+    const queryClient = useQueryClient();
+    const updateEpisode = episodeService.patch.bind(episodeService);
+    const { mutate, isPending } = useMutation({
+        mutationFn: updateEpisode,
+        onSuccess: () => {
+            queryClient.invalidateQueries('/episode');
+            toast.success('Update successfully!!!', {
+                position: 'bottom-right',
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: 'light',
+                transition: Bounce,
+            });
+        },
+    });
+
+    return {
+        updateEpisode: mutate,
+        isPending,
+    };
+};
+
+export const useCreateMovie = () => {
+    const queryClient = useQueryClient();
+    const createMovie = movieService.post.bind(movieService);
+    const { mutate, isPending } = useMutation({
+        mutationFn: createMovie,
+        onSuccess: () => {
+            queryClient.invalidateQueries('/movie');
+            toast.success('Create successfully!!!', {
+                position: 'bottom-right',
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: 'light',
+                transition: Bounce,
+            });
+        },
+    });
+
+    return {
+        createMovie: mutate,
         isPending,
     };
 };
