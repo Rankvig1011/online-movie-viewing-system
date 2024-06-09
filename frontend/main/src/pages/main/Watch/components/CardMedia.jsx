@@ -9,8 +9,10 @@ import CardContent from '@mui/material/CardContent';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import CloseIcon from '@mui/icons-material/Close';
+import ReactPlayer from 'react-player';
 function CardMedia(props) {
-    const { handleClosePlayMovie, isPlayMovie } = props;
+    const { handleClosePlayMovie, isPlayMovie, handleNextEpisode, handlePrevEpisode, lengthMovie } =
+        props;
     return (
         <>
             <Box
@@ -40,28 +42,51 @@ function CardMedia(props) {
                 </Tooltip>
             </Box>
             <Card container sx={{ my: 1 }}>
-                <iframe
+                {/* <iframe
                     alt="movie"
                     width={'100%'}
                     height={'550px'}
                     src={'https://www.youtube.com/embed/tgbNymZ7vqY'}
-                />
+                /> */}
+                <Box tw="relative " sx={{ display: 'flex', justifyContent: 'center' }}>
+                    <ReactPlayer
+                        width={'980px'}
+                        height={'550px'}
+                        tw="rounded-md [video]:rounded-md"
+                        url={`http://localhost:3200/api/v1/streaming/${isPlayMovie?.link}`}
+                        controls
+                    />
+                </Box>
                 <CardContent>
                     <Typography gutterBottom variant="h5">
                         {isPlayMovie?.alias}
                     </Typography>
                 </CardContent>
                 <CardActions>
-                    <Tooltip title="Tập trước">
-                        <IconButton type="submit" size="large" color="secondary">
-                            <KeyboardArrowLeftIcon />
-                        </IconButton>
-                    </Tooltip>
-                    <Tooltip title="Tập tiếp theo">
-                        <IconButton type="submit" size="large" color="secondary">
-                            <KeyboardArrowRightIcon />
-                        </IconButton>
-                    </Tooltip>
+                    {isPlayMovie?.position != (0 || 1) && (
+                        <Tooltip title="Tập trước">
+                            <IconButton
+                                type="submit"
+                                size="large"
+                                color="secondary"
+                                onClick={handlePrevEpisode}
+                            >
+                                <KeyboardArrowLeftIcon />
+                            </IconButton>
+                        </Tooltip>
+                    )}
+                    {lengthMovie > isPlayMovie?.position && (
+                        <Tooltip title="Tập tiếp theo">
+                            <IconButton
+                                type="submit"
+                                size="large"
+                                color="secondary"
+                                onClick={handleNextEpisode}
+                            >
+                                <KeyboardArrowRightIcon />
+                            </IconButton>
+                        </Tooltip>
+                    )}
                 </CardActions>
             </Card>
         </>
