@@ -1,3 +1,4 @@
+import { ResponseApp } from '../common/response.js';
 import commentService from '../service/comment.service.js';
 import GeneralController from './general.controller.js';
 
@@ -8,11 +9,12 @@ class CommentController extends GeneralController {
 
     async findCommentByMovieId(req, res) {
         try {
-            const { movie } = req.params;
+            const { movie } = req.query;
+
             const comments = await commentService.findCommentByMovieId(movie);
-            ResponseApp.ok(comments, res);
+            ResponseApp.ok(res, comments);
         } catch (error) {
-            ResponseApp.failed(error, res);
+            ResponseApp.failed(res, error);
         }
     }
 }
