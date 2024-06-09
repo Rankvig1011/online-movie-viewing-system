@@ -21,7 +21,7 @@ export const Header = ({ toggleShowDrawer }) => {
         const currentRouter = adminRouter.children.find(
             (router) => router.path === location.pathname.replace('/admin/', '')
         );
-        setTitle(currentRouter.title);
+        setTitle(currentRouter?.title);
     }, [location]);
     return (
         <Wrapper>
