@@ -16,13 +16,13 @@ class CommentService extends GeneralService {
                 populate: [
                     {
                         path: 'userPost',
-                        model: userModel.name,
+                        model: userModel,
                         select: ['name', 'avatar'],
                     },
                     {
                         path: 'userReply',
-                        model: userModel.name,
-                        select: ['name'],
+                        model: userModel,
+                        select: ['name', 'avatar'],
                     },
                 ],
             });

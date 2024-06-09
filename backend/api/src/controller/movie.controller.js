@@ -43,5 +43,15 @@ class MovieController extends GeneralController {
             ResponseApp.failed(res, error);
         }
     }
+
+    async updateView(req, res) {
+        try {
+            const { id } = req.params;
+            const movie = await movieService.updateView(id);
+            ResponseApp.ok(res, movie);
+        } catch (error) {
+            ResponseApp.failed(res, error);
+        }
+    }
 }
 export default new MovieController();

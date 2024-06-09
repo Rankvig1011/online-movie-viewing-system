@@ -68,6 +68,10 @@ class MovieService extends GeneralService {
     async findTopView() {
         return movieModel.find().sort({ totalView: -1 }).limit(10);
     }
+
+    async updateView(id) {
+        return await movieModel.findByIdAndUpdate(id, { $inc: { totalView: 1 } });
+    }
 }
 
 export default new MovieService();
