@@ -55,6 +55,20 @@ export const Watch = () => {
             setPlayMovie(value);
         }
     };
+    const handleNextEpisode = () => {
+        const position = Number(isPlayMovie?.position) + 1;
+        const newMovie = moviesEpisodes?.find((item) => {
+            if (item?.position == position) return item;
+        });
+        setPlayMovie(newMovie);
+    };
+    const handlePrevEpisode = () => {
+        const position = Number(isPlayMovie?.position) - 1;
+        const newMovie = moviesEpisodes?.find((item) => {
+            if (item?.position == position) return item;
+        });
+        setPlayMovie(newMovie);
+    };
     return (
         <>
             <main>
@@ -68,6 +82,13 @@ export const Watch = () => {
                                 handleClosePlayMovie={() => {
                                     setPlayMovie(null);
                                 }}
+                                handleNextEpisode={() => {
+                                    handleNextEpisode();
+                                }}
+                                handlePrevEpisode={() => {
+                                    handlePrevEpisode();
+                                }}
+                                lengthMovie={moviesEpisodes?.length}
                             />
                         </>
                     )}
