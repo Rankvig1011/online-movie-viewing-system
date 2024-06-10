@@ -53,5 +53,16 @@ class MovieController extends GeneralController {
             ResponseApp.failed(res, error);
         }
     }
+
+    async findByActors(req, res) {
+        try {
+            const { actors } = req.body;
+            console.log(actors);
+            const movies = await movieService.findByActors(actors);
+            ResponseApp.ok(res, movies);
+        } catch (error) {
+            ResponseApp.failed(res, error);
+        }
+    }
 }
 export default new MovieController();

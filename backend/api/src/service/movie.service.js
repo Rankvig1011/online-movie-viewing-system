@@ -4,6 +4,7 @@ import commonService from './common.service.js';
 import categoryService from './category.service.js';
 import axios from 'axios';
 import { createSlug } from '../common/index.js';
+import actorModel from '../model/actor.model.js';
 
 class MovieService extends GeneralService {
     commonService = commonService;
@@ -71,6 +72,17 @@ class MovieService extends GeneralService {
 
     async updateView(id) {
         return await movieModel.findByIdAndUpdate(id, { $inc: { totalView: 1 } });
+    }
+
+    async findByActors(actors) {
+        const actor = await actorModel.find({ name: { $in: actors } }, '_id');
+        if (actor.length > 0) {
+            const data = actor.map((item) => {
+                return item._id;
+            });
+            return await movieModel.find({ actors: { $in: data } });
+        }
+        return [];
     }
 }
 

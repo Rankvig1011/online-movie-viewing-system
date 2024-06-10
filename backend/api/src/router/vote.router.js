@@ -3,6 +3,7 @@ import express from 'express';
 
 const router = express.Router();
 
+router.get('/movie', voteController.findVoteByMovieId);
 router.get('/', voteController.find);
 router.get('/:id', voteController.findById);
 router.post('/', voteController.create);

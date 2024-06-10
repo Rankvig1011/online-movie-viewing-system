@@ -3,17 +3,22 @@ import faceApiService from "./face-api.service.js";
 class FaceApiController {
   search(req, res) {
     try {
-      console.log("req.files", req.files);
-      const data = faceApiService.search(req.file);
+      const data = faceApiService.search(req.files[0]);
       res.json({ data });
     } catch (error) {
       console.log(error);
     }
   }
 
-  searchURL(req, res) {
-    console.log(req.url);
-    return faceApiService.searchUrl(req.url);
+  async searchURL(req, res) {
+    console.log(req.body.url);
+    try {
+      const data = await faceApiService.searchUrl(req.body.url);
+      console.log("data", data);
+      res.json({ data });
+    } catch (error) {
+      console.log(error);
+    }
   }
 }
 

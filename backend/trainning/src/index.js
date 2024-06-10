@@ -7,7 +7,9 @@ const app = express();
 app.use(express.json());
 connect();
 const upload = multer();
-app.post("/api/search-url", upload.any(), faceApiController.search);
+app.post("/api/search-image-url", faceApiController.searchURL);
+
+app.post("/api/search-image", upload.any(), faceApiController.search);
 
 app.listen(3201, function () {
   console.log("Example app listening on port 3201!");

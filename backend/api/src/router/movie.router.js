@@ -9,6 +9,7 @@ router.get('/:id', movieController.findById);
 // router.use(middleware.authenticate);
 // router.use(middleware.authorizeForAdmin);
 
+router.post('/search/actors', movieController.findByActors);
 router.post('/', movieController.create);
 router.patch('/view/:id', movieController.updateView);
 router.patch('/:id', movieController.update);
