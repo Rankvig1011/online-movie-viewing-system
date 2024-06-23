@@ -9,14 +9,14 @@ class UserService extends GeneralService {
     async createWithGoogle(user) {
         const emailExist = await this.findOne({ email: user.email });
         if (emailExist) {
-            throw new Error('Email already exists');
+            return emailExist;
         } else {
             user = {
                 ...user,
                 username: '',
                 password: '',
             };
-            const createdUser = new this.userModel(user);
+            const createdUser = new userModel(user);
             return createdUser.save();
         }
     }

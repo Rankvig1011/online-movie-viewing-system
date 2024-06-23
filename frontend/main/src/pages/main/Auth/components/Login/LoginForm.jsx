@@ -18,7 +18,7 @@ import GoogleIcon from '@mui/icons-material/Google';
 // import TextField from '@mui/material/TextField';
 import '../../index.css';
 export const LoginForm = (props) => {
-    const { onSubmitLogin } = props;
+    const { onSubmitLogin, handleSubmitGoogle } = props;
     const logoStyle = {
         width: '80px',
         height: 'auto',
@@ -40,7 +40,7 @@ export const LoginForm = (props) => {
     };
     return (
         <ThemeProviderTheme>
-            <GridMui container component="main" class={'pagelogin'}>
+            <GridMui container component="main" className={'pagelogin'}>
                 <GridMui
                     container
                     sx={{
@@ -130,10 +130,11 @@ export const LoginForm = (props) => {
                                     Đăng nhập
                                 </CustomButton>
                                 <CustomButton
-                                    type="submit"
+                                    type="button"
                                     fullWidth
                                     variant="outlined"
                                     sx={{ mt: 1, mb: 1 }}
+                                    onClick={handleSubmitGoogle}
                                 >
                                     Đăng nhập với Google <GoogleIcon />
                                 </CustomButton>
