@@ -84,6 +84,11 @@ class MovieService extends GeneralService {
         }
         return [];
     }
+    async findByNameMovie(nameMovie) {
+        const movie = await movieModel.find({ name: new RegExp(nameMovie, 'i') });
+        console.log('movie::', movie);
+        return movie;
+    }
 }
 
 export default new MovieService();

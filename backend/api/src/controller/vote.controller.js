@@ -17,5 +17,15 @@ class VoteController extends GeneralController {
             ResponseApp.failed(res, error);
         }
     }
+    async findVoteByUserId(req, res) {
+        try {
+            const { userId } = req.query;
+            const votes = await voteService.findVoteByUserId(userId);
+            ResponseApp.ok(res, votes);
+        } catch (error) {
+            console.error(error);
+            ResponseApp.failed(res, error);
+        }
+    }
 }
 export default new VoteController();

@@ -202,3 +202,30 @@ export const useCreateMovie = () => {
         isPending,
     };
 };
+
+export const useUpdateViewMovie = () => {
+    const queryClient = useQueryClient();
+    const updateView = movieService.patchUpdateView.bind(movieService);
+    const { mutate, isPending } = useMutation({
+        mutationFn: updateView,
+        onSuccess: () => {
+            queryClient.invalidateQueries('/episode');
+            toast.success('Update successfully!!!', {
+                position: 'bottom-right',
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: 'light',
+                transition: Bounce,
+            });
+        },
+    });
+
+    return {
+        updateView: mutate,
+        isPending,
+    };
+};

@@ -12,5 +12,11 @@ class VoteService extends GeneralService {
             .populate('user', ['name', 'avatar'])
             .populate('movie', ['name', 'isVip']);
     }
+    async findVoteByUserId(user) {
+        return await voteModel
+            .find({ user })
+            .populate('user', ['name', 'avatar'])
+            .populate('movie', ['name', 'isVip']);
+    }
 }
 export default new VoteService();
