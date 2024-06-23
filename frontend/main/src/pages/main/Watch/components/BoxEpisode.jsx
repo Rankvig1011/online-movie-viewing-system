@@ -16,9 +16,8 @@ function BoxEpisode(props) {
     const sliderRef = useRef();
     const { screenType } = useResponsive();
     useEffect(() => {
-        if (movieData) {
-            setImgActor(movieData);
-        }
+        console.log('movieData::', movieData);
+        setImgActor(movieData);
     }, [movieData]);
     const settings = {
         arrows: false,
@@ -75,68 +74,62 @@ function BoxEpisode(props) {
         );
     };
     return (
-        <>
-            {isImgActor?.length > 0 ? (
-                <Box
-                    sx={{
-                        mx: 2,
-                        mt: 6,
-                    }}
-                >
-                    <Box
-                        sx={{
-                            padding: '10px 20px 10px 20px',
-                            textAlign: 'left',
-                            backgroundColor: '#f5f5f5',
-                            borderRadius: '10px',
-                            flexShrink: 0,
-                            mt: 4,
-                            borderBottom: '2px solid transparent',
-                            '&:hover': { borderBottom: '2px solid #f50057' },
-                            display: 'flex',
-                            justifyContent: 'space-between',
-                        }}
+        <Box
+            sx={{
+                mx: 2,
+                mt: 6,
+            }}
+        >
+            <Box
+                sx={{
+                    padding: '10px 20px 10px 20px',
+                    textAlign: 'left',
+                    backgroundColor: '#f5f5f5',
+                    borderRadius: '10px',
+                    flexShrink: 0,
+                    mt: 4,
+                    borderBottom: '2px solid transparent',
+                    '&:hover': { borderBottom: '2px solid #f50057' },
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                }}
+            >
+                <Typography component="h6" variant="h6" color="inherit">
+                    Tập phim
+                </Typography>
+                <Tooltip title="Đóng">
+                    <IconButton
+                        type="submit"
+                        size="small"
+                        color="secondary"
+                        onClick={handleCloseEpisode}
                     >
-                        <Typography component="h6" variant="h6" color="inherit">
-                            Tập phim
-                        </Typography>
-                        <Tooltip title="Đóng">
-                            <IconButton
-                                type="submit"
-                                size="small"
-                                color="secondary"
-                                onClick={handleCloseEpisode}
-                            >
-                                <CloseIcon />
-                            </IconButton>
-                        </Tooltip>
-                    </Box>
-                    <Box className="container-slider">
-                        <Container maxWidth="xl" className="slider">
-                            {screenType !== 'MOBILE' && (
-                                <div onClick={() => sliderRef.current.slickPrev()} className="prev">
-                                    <KeyboardArrowLeftIcon style={{ fontSize: 30 }} />
-                                </div>
-                            )}
-                            {isImgActor?.length > 4 ? (
-                                <Slider {...settings} ref={sliderRef}>
-                                    {isImgActor?.map((item) => returnComponent(item))}
-                                </Slider>
-                            ) : (
-                                <>{isImgActor?.map((item) => returnComponent(item))}</>
-                            )}
-                            {screenType !== 'MOBILE' && (
-                                <div onClick={() => sliderRef.current.slickNext()} className="next">
-                                    <KeyboardArrowRightIcon style={{ fontSize: 30 }} />
-                                </div>
-                            )}
-                        </Container>
-                    </Box>
-                </Box>
-            ) : (
-                ''
-            )}
-        </>
+                        <CloseIcon />
+                    </IconButton>
+                </Tooltip>
+            </Box>
+            <Box className="container-slider">
+                <Container maxWidth="xl" className="slider">
+                    {screenType !== 'MOBILE' && (
+                        <div onClick={() => sliderRef.current.slickPrev()} className="prev">
+                            <KeyboardArrowLeftIcon style={{ fontSize: 30 }} />
+                        </div>
+                    )}
+                    {isImgActor?.length > 4 ? (
+                        <Slider {...settings} ref={sliderRef}>
+                            {isImgActor?.map((item) => returnComponent(item))}
+                        </Slider>
+                    ) : (
+                        <>{isImgActor?.map((item) => returnComponent(item))}</>
+                    )}
+                    {screenType !== 'MOBILE' && (
+                        <div onClick={() => sliderRef.current.slickNext()} className="next">
+                            <KeyboardArrowRightIcon style={{ fontSize: 30 }} />
+                        </div>
+                    )}
+                </Container>
+            </Box>
+        </Box>
     );
 }
 

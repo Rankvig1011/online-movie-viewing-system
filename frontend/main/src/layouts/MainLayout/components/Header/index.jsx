@@ -16,6 +16,10 @@ import Menu from '@mui/material/Menu';
 import Fade from '@mui/material/Fade';
 import Avatar from '@mui/material/Avatar';
 import { Link, useNavigate } from 'react-router-dom';
+import { Search } from '@mui/icons-material';
+import { styled } from '@mui/material/styles';
+import SearchIcon from '@mui/icons-material/Search';
+import InputBase from '@mui/material/InputBase';
 const logoStyle = {
     width: '80px',
     height: 'auto',
@@ -52,9 +56,7 @@ export const Header = () => {
         }
     };
     const handleClickLogout = () => {
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('role');
-        localStorage.removeItem('profile');
+        localStorage.clear();
         handleClickCloseOption();
         navigate('/auth/login');
     };
@@ -66,6 +68,31 @@ export const Header = () => {
     // const handleClickRegister = () => {
     //     navigate('/auth/register');
     // };
+    const SearchIconWrapper = styled('div')(({ theme }) => ({
+        padding: theme.spacing(0, 2),
+        height: '100%',
+        position: 'absolute',
+        pointerEvents: 'none',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+    }));
+    const StyledInputBase = styled(InputBase)(({ theme }) => ({
+        color: 'inherit',
+        width: '100%',
+        '& .MuiInputBase-input': {
+            padding: theme.spacing(1, 1, 1, 0),
+            // vertical padding + font size from searchIcon
+            paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+            transition: theme.transitions.create('width'),
+            [theme.breakpoints.up('sm')]: {
+                width: '12ch',
+                '&:focus': {
+                    width: '20ch',
+                },
+            },
+        },
+    }));
     return (
         <AppBar
             position="fixed"
@@ -155,6 +182,15 @@ export const Header = () => {
                             alignItems: 'center',
                         }}
                     >
+                        <Search>
+                            <SearchIconWrapper>
+                                <SearchIcon />
+                            </SearchIconWrapper>
+                            <StyledInputBase
+                                placeholder="Search…"
+                                inputProps={{ 'aria-label': 'search' }}
+                            />
+                        </Search>
                         {/* <ToggleColorMode mode={mode} toggleColorMode={toggleColorMode} /> */}
                         <Button
                             color="primary"
@@ -164,7 +200,11 @@ export const Header = () => {
                             target="_blank"
                             onClick={handleClickOpenOption}
                         >
-                            <Avatar alt="Remy Sharp" src={profileLocalParse?.imgUser || ''} sx={{mr:1}}/>
+                            <Avatar
+                                alt="Remy Sharp"
+                                src={profileLocalParse?.imgUser || ''}
+                                sx={{ mr: 1 }}
+                            />
                             {profileLocalParse.name}
                         </Button>
                         <Menu

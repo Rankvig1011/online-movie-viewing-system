@@ -50,12 +50,13 @@ export const Watch = () => {
     };
     useEffect(() => {
         if (movieData) {
-            resetState();
             const newMoviesCategories = {
                 ...movieData?.category,
                 movies: movies.filter((movie) => movie.category._id === movieData?.category?._id),
             };
             setMoviesCategories(newMoviesCategories);
+        } else {
+            resetState();
         }
     }, [movieData, movies]);
     useEffect(() => {
