@@ -1,5 +1,5 @@
 import Box from '@mui/material/Box';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Typography from '@mui/material/Typography';
 import Paper from '@mui/material/Paper';
 import Grid from '@mui/material/Grid';
@@ -16,109 +16,42 @@ import CloseIcon from '@mui/icons-material/Close';
 import Reply from './Reply';
 import CommentReply from './CommentReply';
 import DeleteIcon from '@mui/icons-material/Delete';
-function Comment() {
-    const FAKE_DATA = [
-        {
-            avatar: 'https://scontent.fhan20-1.fna.fbcdn.net/v/t39.30808-1/369170363_2627650640715914_7638493183067359501_n.jpg?stp=dst-jpg_p200x200&_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=e__Dh_5-Ct8Q7kNvgFqZPh-&_nc_ht=scontent.fhan20-1.fna&oh=00_AYB8TX-sfWEf5w7Qr3NPUOYQNmT2mRU0QOWRi4f4At35Nw&oe=6668E2A3',
-            nameUser: 'Quý Ice',
-            _id: '666564304e7903f2eee8cb21',
-            content: 'Comment tesst 1',
-            user: '661a0991d737acbc38a53ee0',
-            movie: '6636fd391dc6ff44fcbf8316',
-            status: true,
-            reply: [
-                {
-                    avatar: 'https://scontent.fhan20-1.fna.fbcdn.net/v/t39.30808-1/369170363_2627650640715914_7638493183067359501_n.jpg?stp=dst-jpg_p200x200&_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=e__Dh_5-Ct8Q7kNvgFqZPh-&_nc_ht=scontent.fhan20-1.fna&oh=00_AYB8TX-sfWEf5w7Qr3NPUOYQNmT2mRU0QOWRi4f4At35Nw&oe=6668E2A3',
-                    nameUser: 'Quý Ice',
-                    userPost: '661a0991d737acbc38a53ee0',
-                    userReply: '6654a6c942f591279c572b96',
-                    content: 'reply comment tesst 1',
-                    createdAt: '2024-06-09T08:04:29.385Z',
-                    updatedAt: '2024-06-09T08:04:29.385Z',
-                    _id: '666564304e7903f2eee8cb26',
-                },
-                {
-                    avatar: 'https://scontent.fhan20-1.fna.fbcdn.net/v/t39.30808-1/369170363_2627650640715914_7638493183067359501_n.jpg?stp=dst-jpg_p200x200&_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=e__Dh_5-Ct8Q7kNvgFqZPh-&_nc_ht=scontent.fhan20-1.fna&oh=00_AYB8TX-sfWEf5w7Qr3NPUOYQNmT2mRU0QOWRi4f4At35Nw&oe=6668E2A3',
-                    nameUser: 'Quý Ice',
-                    userPost: '661a0991d737acbc38a53ee0',
-                    userReply: '6654a6c942f591279c572b96',
-                    content: 'reply comment tesst 1',
-                    createdAt: '2024-06-09T08:04:29.385Z',
-                    updatedAt: '2024-06-09T08:04:29.385Z',
-                    _id: '661a0991d737acbc38a53ee0',
-                },
-                {
-                    avatar: 'https://scontent.fhan20-1.fna.fbcdn.net/v/t39.30808-1/369170363_2627650640715914_7638493183067359501_n.jpg?stp=dst-jpg_p200x200&_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=e__Dh_5-Ct8Q7kNvgFqZPh-&_nc_ht=scontent.fhan20-1.fna&oh=00_AYB8TX-sfWEf5w7Qr3NPUOYQNmT2mRU0QOWRi4f4At35Nw&oe=6668E2A3',
-                    nameUser: 'Quý Ice',
-                    userPost: '661a0991d737acbc38a53ee0',
-                    userReply: '6654a6c942f591279c572b96',
-                    content: 'reply comment tesst 1',
-                    createdAt: '2024-06-09T08:04:29.385Z',
-                    updatedAt: '2024-06-09T08:04:29.385Z',
-                    _id: '666564304e7903f2eee8cb26',
-                },
-            ],
-            createdAt: '2024-06-09T08:13:36.972Z',
-            updatedAt: '2024-06-09T08:13:36.972Z',
-            __v: 0,
-        },
-        {
-            avatar: 'https://scontent.fhan20-1.fna.fbcdn.net/v/t39.30808-1/369170363_2627650640715914_7638493183067359501_n.jpg?stp=dst-jpg_p200x200&_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=e__Dh_5-Ct8Q7kNvgFqZPh-&_nc_ht=scontent.fhan20-1.fna&oh=00_AYB8TX-sfWEf5w7Qr3NPUOYQNmT2mRU0QOWRi4f4At35Nw&oe=6668E2A3',
-            nameUser: 'Quý Ice',
-            _id: '666564304e7903f2eee8cb23',
-            content: 'Comment tesst 1',
-            user: '661a0991d737acbc38a53ee0',
-            movie: '6636fd391dc6ff44fcbf8316',
-            status: true,
-            reply: [
-                {
-                    avatar: 'https://scontent.fhan20-1.fna.fbcdn.net/v/t39.30808-1/369170363_2627650640715914_7638493183067359501_n.jpg?stp=dst-jpg_p200x200&_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=e__Dh_5-Ct8Q7kNvgFqZPh-&_nc_ht=scontent.fhan20-1.fna&oh=00_AYB8TX-sfWEf5w7Qr3NPUOYQNmT2mRU0QOWRi4f4At35Nw&oe=6668E2A3',
-                    nameUser: 'Quý Ice',
-                    userPost: '661a0991d737acbc38a53ee0',
-                    userReply: '6654a6c942f591279c572b96',
-                    content: 'reply comment tesst 1',
-                    createdAt: '2024-06-09T08:04:29.385Z',
-                    updatedAt: '2024-06-09T08:04:29.385Z',
-                    _id: '666564304e7903f2eee8cb26',
-                },
-                {
-                    avatar: 'https://scontent.fhan20-1.fna.fbcdn.net/v/t39.30808-1/369170363_2627650640715914_7638493183067359501_n.jpg?stp=dst-jpg_p200x200&_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=e__Dh_5-Ct8Q7kNvgFqZPh-&_nc_ht=scontent.fhan20-1.fna&oh=00_AYB8TX-sfWEf5w7Qr3NPUOYQNmT2mRU0QOWRi4f4At35Nw&oe=6668E2A3',
-                    nameUser: 'Quý Ice',
-                    userPost: '661a0991d737acbc38a53ee0',
-                    userReply: '6654a6c942f591279c572b96',
-                    content: 'reply comment tesst 1',
-                    createdAt: '2024-06-09T08:04:29.385Z',
-                    updatedAt: '2024-06-09T08:04:29.385Z',
-                    _id: '666564304e7903f2eee8cb26',
-                },
-            ],
-            createdAt: '2024-06-09T08:13:36.972Z',
-            updatedAt: '2024-06-09T08:13:36.972Z',
-            __v: 0,
-        },
-        {
-            avatar: 'https://scontent.fhan20-1.fna.fbcdn.net/v/t39.30808-1/369170363_2627650640715914_7638493183067359501_n.jpg?stp=dst-jpg_p200x200&_nc_cat=103&ccb=1-7&_nc_sid=5f2048&_nc_ohc=e__Dh_5-Ct8Q7kNvgFqZPh-&_nc_ht=scontent.fhan20-1.fna&oh=00_AYB8TX-sfWEf5w7Qr3NPUOYQNmT2mRU0QOWRi4f4At35Nw&oe=6668E2A3',
-            nameUser: 'Quý Ice',
-            _id: '661a0991d737acbc38a53ee0',
-            content: 'Comment tesst 1',
-            user: '661a0991d737acbc38a53ee0',
-            movie: '6636fd391dc6ff44fcbf8316',
-            status: true,
-            reply: [],
-            createdAt: '2024-06-09T08:13:36.972Z',
-            updatedAt: '2024-06-09T08:13:36.972Z',
-            __v: 0,
-        },
-    ];
+import { useCommentDetail, useDeleteComment } from '@/hooks/comments';
+function Comment(props) {
+    const { idMovie, onSubmitComment, onSubmitReplyComment } = props;
+    const { commentData } = useCommentDetail(idMovie);
+    const { deleteComment } = useDeleteComment();
     const profileLocal = localStorage.getItem('profile');
     const profileLocalParse = JSON.parse(profileLocal);
     const [isOpenReply, setReply] = useState(null);
     const [isOpenComment, seOpenComment] = useState(false);
+    const [isDataComment, setDataComment] = useState(null);
     const handleOpenReply = (valueId) => {
         setReply(valueId);
     };
+    const handleDeleteComment = (idComment) => {
+        deleteComment(idComment);
+    };
     const handleOpenComment = (valueId) => {
         seOpenComment(valueId);
+    };
+    useEffect(() => {
+        console.log('commentData::', commentData);
+        if (commentData?.length) {
+            setDataComment(commentData);
+        }
+    }, [commentData]);
+    const handleComment = (event) => {
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        const newPayloadLogin = {
+            movie: idMovie,
+            content: data.get('commentInfo'),
+            user: profileLocalParse._id,
+            createdAt: new Date(),
+            updatedAt: new Date(),
+        };
+        onSubmitComment(newPayloadLogin);
     };
     return (
         <>
@@ -158,11 +91,15 @@ function Comment() {
                         noValidate
                         autoComplete="off"
                         component="form"
+                        onSubmit={handleComment}
                     >
                         <TextField
                             id="outlined-multiline-static"
                             label="Bình luận của bạn"
                             multiline
+                            name="commentInfo"
+                            autoFocus
+                            autoComplete="commentInfo"
                             rows={4}
                             // defaultValue="Default Value"
                         />
@@ -172,7 +109,9 @@ function Comment() {
                                 justifyContent: 'end',
                             }}
                         >
-                            <Button variant="outlined">Bình luận</Button>
+                            <Button variant="outlined" type="submit">
+                                Bình luận
+                            </Button>
                         </Box>
                     </Box>
                 </Paper>
@@ -186,12 +125,12 @@ function Comment() {
                         marginTop: '15px',
                     }}
                 >
-                    {FAKE_DATA?.map((item) => {
+                    {isDataComment?.map((item) => {
                         return (
                             <>
                                 <Grid container wrap="nowrap" spacing={2}>
                                     <Grid item>
-                                        <Avatar alt="Remy Sharp" src={item?.avatar} />
+                                        <Avatar alt="Remy Sharp" src={item?.user?.avatar} />
                                     </Grid>
                                     <Grid justifyContent="left" item xs zeroMinWidth>
                                         <Box
@@ -202,7 +141,7 @@ function Comment() {
                                         >
                                             <div>
                                                 <h4 style={{ margin: 0, textAlign: 'left' }}>
-                                                    {item?.nameUser}
+                                                    {item?.user?.name}
                                                 </h4>
                                                 <p style={{ textAlign: 'left' }}>
                                                     {item?.content + '.'}
@@ -240,8 +179,13 @@ function Comment() {
                                                 ) : (
                                                     ''
                                                 )}
-                                                {profileLocalParse?._id == item._id && (
-                                                    <Tooltip title="Xóa bình luận">
+                                                {profileLocalParse?._id == item?.user._id && (
+                                                    <Tooltip
+                                                        title="Xóa bình luận"
+                                                        onClick={() => {
+                                                            handleDeleteComment(item?._id);
+                                                        }}
+                                                    >
                                                         <IconButton color="primary">
                                                             <DeleteIcon />
                                                         </IconButton>
@@ -256,6 +200,9 @@ function Comment() {
                                         handleCloseReply={() => {
                                             setReply(null);
                                         }}
+                                        idMovie={idMovie}
+                                        onSubmitReplyComment={onSubmitReplyComment}
+                                        itemComment={item}
                                     ></Reply>
                                 )}
                                 {item._id == isOpenComment && item?.reply?.length && (
@@ -277,6 +224,9 @@ function Comment() {
                                                         <CommentReply
                                                             itemReply={itemReply}
                                                             profileLocalParse={profileLocalParse}
+                                                            handleDeleteComment={
+                                                                handleDeleteComment
+                                                            }
                                                         />
                                                     </>
                                                 );

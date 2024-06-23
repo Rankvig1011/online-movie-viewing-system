@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import { ThumbUpOutlined } from '@mui/icons-material';
 import RemoveRedEyeIcon from '@mui/icons-material/RemoveRedEye';
 import moment from 'moment';
-import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+// import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import ThumbUpIcon from '@mui/icons-material/ThumbUp';
 import PlayCircleIcon from '@mui/icons-material/PlayCircle';
 import IconButton from '@mui/material/IconButton';
@@ -56,7 +56,7 @@ function InfoMovie(props) {
                                     <PlayCircleIcon />
                                 </IconButton>
                             </Tooltip>
-                            <Tooltip title="Theo dõi">
+                            {/* <Tooltip title="Theo dõi">
                                 <IconButton
                                     type="submit"
                                     color="primary"
@@ -66,7 +66,7 @@ function InfoMovie(props) {
                                 >
                                     <AddCircleOutlineIcon />
                                 </IconButton>
-                            </Tooltip>
+                            </Tooltip> */}
                             <Tooltip title="Yêu thích">
                                 <IconButton type="submit" size="large" color="secondary">
                                     <ThumbUpIcon />
