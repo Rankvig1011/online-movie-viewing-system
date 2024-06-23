@@ -1,5 +1,5 @@
-import voteModel from '../model/vote.model';
-import GeneralService from './general.service';
+import voteModel from '../model/vote.model.js';
+import GeneralService from './general.service.js';
 
 class VoteService extends GeneralService {
     constructor() {

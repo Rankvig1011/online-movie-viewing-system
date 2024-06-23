@@ -8,6 +8,7 @@ import { commentRouter } from './comment.router.js';
 
 import { uploadRouter } from './upload.router.js';
 import { streamRouter } from './streaming.router.js';
+import { voteRouter } from './vote.router.js';
 
 export const router = (app) => {
     app.use('/api/users', userRouter);
@@ -19,4 +20,5 @@ export const router = (app) => {
     app.use('/api/upload-image', uploadRouter);
     app.use('/api/v1/streaming', streamRouter);
     app.use('/api/comment', commentRouter);
+    app.use('/api/vote', voteRouter);
 };
