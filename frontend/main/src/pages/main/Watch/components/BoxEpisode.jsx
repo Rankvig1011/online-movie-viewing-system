@@ -30,6 +30,50 @@ function BoxEpisode(props) {
         slidesToShow: screenType === 'MOBILE' ? 2 : 4,
         slidesToScroll: screenType === 'MOBILE' ? 2 : 4,
     };
+    const returnComponent = (item) => {
+        return (
+            <>
+                <Tooltip title={item?.name || 'Xem phim'}>
+                    <Box
+                        style={{
+                            position: 'relative',
+                            width: '100%',
+                            overflow: 'hidden',
+                            backgroundSize: 'cover',
+                            backgroundPosition: 'center',
+                        }}
+                        onClick={() => {
+                            handlePlayMovie(item);
+                        }}
+                    >
+                        <img
+                            src={item?.coverImage}
+                            style={{
+                                margin: '10px',
+                                width: '300px',
+                                height: '250px',
+                                objectFit: 'cover',
+                                verticalAlign: 'bottom',
+                                borderRadius: '10px',
+                            }}
+                            className="bg-image-container"
+                        />
+                        <div
+                            style={{
+                                position: 'absolute',
+                                left: '20px',
+                                bottom: '20px',
+                                fontSize: '20px',
+                                color: 'white',
+                            }}
+                        >
+                            {item?.alias}
+                        </div>
+                    </Box>
+                </Tooltip>
+            </>
+        );
+    };
     return (
         <>
             {isImgActor?.length > 0 ? (
@@ -74,51 +118,12 @@ function BoxEpisode(props) {
                                     <KeyboardArrowLeftIcon style={{ fontSize: 30 }} />
                                 </div>
                             )}
-                            {isImgActor?.length && (
+                            {isImgActor?.length > 4 ? (
                                 <Slider {...settings} ref={sliderRef}>
-                                    {isImgActor?.map((item) => (
-                                        <>
-                                            <Tooltip title={item?.name || 'Xem phim'}>
-                                                <Box
-                                                    style={{
-                                                        position: 'relative',
-                                                        width: '100%',
-                                                        overflow: 'hidden',
-                                                        backgroundSize: 'cover',
-                                                        backgroundPosition: 'center',
-                                                    }}
-                                                    onClick={() => {
-                                                        handlePlayMovie(item);
-                                                    }}
-                                                >
-                                                    <img
-                                                        src={item?.coverImage}
-                                                        style={{
-                                                            margin: '10px',
-                                                            width: '300px',
-                                                            height: '250px',
-                                                            objectFit: 'cover',
-                                                            verticalAlign: 'bottom',
-                                                            borderRadius: '10px',
-                                                        }}
-                                                        className="bg-image-container"
-                                                    />
-                                                    <div
-                                                        style={{
-                                                            position: 'absolute',
-                                                            left: '20px',
-                                                            bottom: '20px',
-                                                            fontSize: '20px',
-                                                            color: 'white',
-                                                        }}
-                                                    >
-                                                        {item?.alias}
-                                                    </div>
-                                                </Box>
-                                            </Tooltip>
-                                        </>
-                                    ))}
+                                    {isImgActor?.map((item) => returnComponent(item))}
                                 </Slider>
+                            ) : (
+                                <>{isImgActor?.map((item) => returnComponent(item))}</>
                             )}
                             {screenType !== 'MOBILE' && (
                                 <div onClick={() => sliderRef.current.slickNext()} className="next">
