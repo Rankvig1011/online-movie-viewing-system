@@ -9,6 +9,7 @@ import Divider from '@mui/material/Divider';
 import DeleteIcon from '@mui/icons-material/Delete';
 function CommentReply(props) {
     const { itemReply, profileLocalParse } = props;
+    const handleDeleteComment = () => {};
     return (
         <>
             <Grid
@@ -23,7 +24,7 @@ function CommentReply(props) {
                 }}
             >
                 <Grid item sx={4}>
-                    <Avatar alt="user" src={itemReply?.avatar} />
+                    <Avatar alt="user" src={itemReply?.user?.avatar} />
                 </Grid>
                 <Grid item sx={8} justifyContent="left" xs zeroMinWidth>
                     <Box
@@ -39,7 +40,7 @@ function CommentReply(props) {
                                     textAlign: 'left',
                                 }}
                             >
-                                {itemReply?.nameUser}
+                                {itemReply?.userReply?.name}
                             </h4>
                             <p
                                 style={{
@@ -57,9 +58,15 @@ function CommentReply(props) {
                                 {'Thời gian:' + moment(itemReply?.createdAt).format('DD/MM/YYYY')}
                             </p>
                         </div>
-                        {profileLocalParse?._id == itemReply?._id && (
+                        {profileLocalParse?._id == itemReply?.userPost?._id && (
                             <>
-                                <Tooltip title="Xóa bình luận">
+                                <Tooltip
+                                    title="Xóa bình luận"
+                                    onClick={() => {
+                                        handleDeleteComment(itemReply?._id);
+                                    }}
+                                    type="submit"
+                                >
                                     <IconButton color="primary">
                                         <DeleteIcon />
                                     </IconButton>

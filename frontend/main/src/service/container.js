@@ -7,10 +7,12 @@ import { WatchService } from './watch';
 import { AuthLoginService } from './authLogin';
 import { ProfileService } from './profile';
 import { AuthRegisterService } from './authRegister';
+import { CommentService } from './comment';
 export const appContainer = awilix.createContainer();
 
 appContainer.register({
     categoryService: awilix.asClass(CategoryService).singleton(),
+    CommentService: awilix.asClass(CommentService).singleton(),
     movieService: awilix.asClass(MovieService).singleton(),
     episodeService: awilix.asClass(EpisodeService).singleton(),
     actorService: awilix.asClass(ActorService).singleton(),
