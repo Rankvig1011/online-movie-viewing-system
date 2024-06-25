@@ -106,20 +106,20 @@ export const MovieForm = ({ movieInfo, onClose }) => {
             <form tw="flex gap-4 flex-col" onSubmit={handleSubmit(onSubmit)}>
                 <Typography tw="text-sm">ID : </Typography>
                 <InputBase
-                    label="Name"
+                    label="Tên"
                     placeholder="Enter name category"
                     {...register('name', { required: 'Name is required' })}
                     error={errors.name?.message}
                 />
                 <InputBase
                     multiline
-                    label="Description"
+                    label="Mô tả"
                     placeholder="Enter description"
                     {...register('description', { required: 'Description is required' })}
                     error={errors.description?.message}
                 />
                 <FormControl fullWidth>
-                    <InputLabel>Category</InputLabel>
+                    <InputLabel>Thể loại</InputLabel>
                     <Select
                         labelId="demo-simple-select-label"
                         label="Category"
@@ -136,21 +136,21 @@ export const MovieForm = ({ movieInfo, onClose }) => {
                 </FormControl>
                 <Container tw="gap-2">
                     <Container tw="flex-col gap-2">
-                        <Typography tw="text-sm">Image Cover</Typography>
+                        <Typography tw="text-sm">Ảnh ngang</Typography>
                         <DropZone files={imageCover} setFiles={setimageCover} isSingle />
                     </Container>
                     <Container tw="flex-col gap-2">
-                        <Typography tw="text-sm">Image H</Typography>
+                        <Typography tw="text-sm">Ảnh dọc</Typography>
                         <DropZone files={imageH} setFiles={setimageH} isSingle />
                     </Container>
                 </Container>
                 <InputBase
-                    label="Duration"
+                    label="Thời gian"
                     placeholder="Enter name duration"
                     {...register('duration')}
                 />
                 <InputBase
-                    label="Duration Str"
+                    label="Thời gian chuỗi"
                     placeholder="Enter name duration str"
                     {...register('durationStr')}
                 />
@@ -162,7 +162,7 @@ export const MovieForm = ({ movieInfo, onClose }) => {
                             defaultValue={field}
                             render={({ field }) => (
                                 <FormControl fullWidth>
-                                    <InputLabel>Actor</InputLabel>
+                                    <InputLabel>Diễn viên</InputLabel>
                                     <Select {...field} label="Category">
                                         {actors.map((actor) => (
                                             <MenuItem key={actor._id} value={actor._id}>
@@ -175,7 +175,7 @@ export const MovieForm = ({ movieInfo, onClose }) => {
                         />
 
                         <button type="button" onClick={() => remove(index)}>
-                            Remove
+                            Xoá DV
                         </button>
                     </div>
                 ))}
@@ -188,7 +188,7 @@ export const MovieForm = ({ movieInfo, onClose }) => {
                     />
                 </FormGroup>
                 <Button type="button" onClick={() => append('')}>
-                    Add actor
+                    Thêm diễn viên
                 </Button>
                 <Button type="submit" variant="contained" disabled={isPending}>
                     Submit

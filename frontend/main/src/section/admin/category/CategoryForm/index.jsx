@@ -44,14 +44,14 @@ export const CategoryForm = ({ categoryInfo, onClose }) => {
             <form tw="flex gap-2 flex-col" onSubmit={handleSubmit(onSubmit)}>
                 {categoryInfo && <Typography tw="text-sm">ID : {categoryInfo._id}</Typography>}
                 <InputBase
-                    label="Name"
+                    label="Tên"
                     placeholder="Enter name category"
                     {...register('name', { required: 'Name is required' })}
                     error={errors.name?.message}
                 />
                 <InputBase
                     multiline
-                    label="Description"
+                    label="Mô tả"
                     placeholder="Enter description"
                     {...register('description', { required: 'Description is required' })}
                     error={errors.description?.message}
