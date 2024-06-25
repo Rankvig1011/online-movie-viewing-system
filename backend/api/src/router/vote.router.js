@@ -4,7 +4,7 @@ import express from 'express';
 const router = express.Router();
 
 router.get('/movie', voteController.findVoteByMovieId);
-router.get('/user', voteController.findVoteByUserId);
+router.get('/user/:userId', voteController.findVoteByUserId);
 router.get('/', voteController.find);
 router.get('/:id', voteController.findById);
 router.post('/', voteController.create);
