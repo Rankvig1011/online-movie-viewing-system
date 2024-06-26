@@ -30,6 +30,9 @@ export const Watch = () => {
         setEpisodeMovie(false);
     };
     useEffect(() => {
+        setPlayMovie(null);
+    }, [id]);
+    useEffect(() => {
         console.log('dataComment::', dataComment);
     }, [dataComment]);
     useEffect(() => {

@@ -36,7 +36,7 @@ function BoxEpisode(props) {
                     <Box
                         style={{
                             position: 'relative',
-                            width: '100%',
+                            width: '350px',
                             overflow: 'hidden',
                             backgroundSize: 'cover',
                             backgroundPosition: 'center',
@@ -120,7 +120,13 @@ function BoxEpisode(props) {
                             {isImgActor?.map((item) => returnComponent(item))}
                         </Slider>
                     ) : (
-                        <>{isImgActor?.map((item) => returnComponent(item))}</>
+                        <>
+                            <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                                {isImgActor?.map((item) => {
+                                    return <>{returnComponent(item)}</>;
+                                })}
+                            </Box>
+                        </>
                     )}
                     {screenType !== 'MOBILE' && (
                         <div onClick={() => sliderRef.current.slickNext()} className="next">
