@@ -46,14 +46,14 @@ export const ActorForm = ({ actorInfo, onClose }) => {
             <form tw="flex gap-2 flex-col" onSubmit={handleSubmit}>
                 {actorInfo && <Typography tw="text-sm">ID : {actorInfo._id}</Typography>}
                 <InputBase
-                    label="Name"
+                    label="Tên diễn viên"
                     placeholder="Enter name actor"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     error={error}
                 />
                 <Container tw="flex-col gap-2">
-                    <Typography tw="text-sm">List Of Image</Typography>
+                    <Typography tw="text-sm">Danh sách ảnh</Typography>
                     <DropZone files={files} setFiles={setFiles} />
                 </Container>
                 <Button

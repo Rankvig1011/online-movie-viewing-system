@@ -43,3 +43,44 @@ export const useLogin = () => {
         isPending: isPending,
     };
 };
+
+export const useLoginWithGoogle = () => {
+    const queryClient = useQueryClient();
+    const loginWithGoogle = authLoginService.loginWithGoogleFromBackEnd.bind(authLoginService);
+    const { data, mutate, isPending } = useMutation({
+        mutationFn: loginWithGoogle,
+        onSuccess: () => {
+            queryClient.invalidateQueries('/');
+            toast.success('Login successfully!!!', {
+                position: 'bottom-right',
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: 'light',
+                transition: Bounce,
+            });
+        },
+        onError: (error) => {
+            queryClient.invalidateQueries('/');
+            toast.error(error?.data?.message || 'Login Fail', {
+                position: 'bottom-right',
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: 'light',
+                transition: Bounce,
+            });
+        },
+    });
+    return {
+        dataLoginWithGoogle: data?.results || [],
+        loginWithGoogleFromBackEnd: mutate,
+        isPending: isPending,
+    };
+};

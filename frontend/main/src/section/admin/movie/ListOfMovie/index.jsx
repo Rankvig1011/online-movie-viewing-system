@@ -66,12 +66,24 @@ export const ListOfMovie = ({ movies, setEditMovieInfo, isMovieActive, setMovieA
               actors: tw`col-span-3`,
               actions: tw`col-span-2 text-center`,
           };
+    const label = {
+        index: 'STT',
+        name: 'Tên',
+        image: 'Ảnh',
+        totalView: 'Lượt xem',
+        totalVote: 'Lượt vote',
+        duration: 'Thời lượng',
+        category: 'Thể loại',
+        isVip: 'VIP',
+        actions: 'Hành động',
+        actors: 'Diễn viên',
+    };
     return (
         <Container tw="flex-col border">
             <Grid tw="w-full py-4 px-4 border-b">
                 {Object.keys(listColumns).map((item, index) => (
                     <Grid.Col key={index} css={listColumns[item]}>
-                        <Text tw="font-semibold">{item.toUpperCase()}</Text>
+                        <Text tw="font-semibold">{label[item].toUpperCase()}</Text>
                     </Grid.Col>
                 ))}
             </Grid>
@@ -142,14 +154,14 @@ export const ListOfMovie = ({ movies, setEditMovieInfo, isMovieActive, setMovieA
                                     <div>
                                         <EditIcon size={24} tw="text-primary" />
                                     </div>
-                                    <TextCustom tw="text-xs hidden md:block">Edit</TextCustom>
+                                    <TextCustom tw="text-xs hidden md:block">Sửa</TextCustom>
                                 </UnstyledButton>
                                 <UnstyledButton onClick={() => setMovieId(movie._id)}>
                                     <div>
                                         <DeleteIcon size={20} tw="text-danger" />
                                     </div>
                                     <TextCustom tw="!text-danger text-xs hidden md:block">
-                                        Delete
+                                        Xoá
                                     </TextCustom>
                                 </UnstyledButton>
                             </Container>

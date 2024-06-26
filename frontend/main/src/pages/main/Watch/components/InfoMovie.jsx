@@ -49,7 +49,7 @@ function InfoMovie(props) {
         }
     };
     const handleUnderVoteMovie = () => {
-        deleteVote(isUseVoteId);
+        deleteVote(`${isUseVoteId?._id}/${isUseVoteId?.movie}`);
     };
     const onPlayView = () => {
         if (!movieViewLocalParse?.includes(movieData?._id)) {
@@ -68,7 +68,7 @@ function InfoMovie(props) {
         if (voteData?.length) {
             const newArr = voteData?.map((item) => {
                 if (item?.user == profileLocalParse._id) {
-                    SetUseVoteId(item?._id);
+                    SetUseVoteId(item);
                 }
                 return item?.user;
             });

@@ -66,6 +66,12 @@ export const ListOfEpisode = ({ movie }) => {
         duration: tw`col-span-2`,
         actions: tw`col-span-3 text-center`,
     };
+    const label = {
+        image: 'Ảnh',
+        alias: 'Tên',
+        duration: 'Thời lượng',
+        actions: 'Hành động',
+    };
     return (
         <>
             <Container tw="flex-col border">
@@ -73,18 +79,18 @@ export const ListOfEpisode = ({ movie }) => {
                     <Container tw="flex-col gap-2">
                         <img src={movie.image} width={'100%'} tw="rounded-md" />
                         <Button variant="contained" onClick={() => setIsOpenAddNewEpisode(true)}>
-                            Add Video
+                            Thêm video
                         </Button>
                     </Container>
                     <Container tw="flex-col gap-2">
                         <Text>
-                            <b>Name</b>: {movie.name}
+                            <b>Têb</b>: {movie.name}
                         </Text>
                         <Text>
-                            <b>Duration</b>: {movie.durationStr}
+                            <b>Độ dài</b>: {movie.durationStr}
                         </Text>
                         <Text>
-                            <b>View</b>: {movie.totalView.toLocaleString()}
+                            <b>Lượt xem</b>: {movie.totalView.toLocaleString()}
                         </Text>
                     </Container>
                 </Container>
@@ -92,7 +98,7 @@ export const ListOfEpisode = ({ movie }) => {
                 <Grid tw="w-full py-4 px-4 border-b">
                     {Object.keys(listColumns).map((item, index) => (
                         <Grid.Col key={index} css={listColumns[item]}>
-                            <Text tw="font-semibold">{item.toUpperCase()}</Text>
+                            <Text tw="font-semibold">{label[item].toUpperCase()}</Text>
                         </Grid.Col>
                     ))}
                 </Grid>
@@ -126,7 +132,7 @@ export const ListOfEpisode = ({ movie }) => {
                                                 <EditIcon size={24} tw="text-primary" />
                                             </div>
                                             <TextCustom tw="text-xs hidden md:block">
-                                                Edit
+                                                Sửa
                                             </TextCustom>
                                         </UnstyledButton>
                                         <UnstyledButton onClick={() => setEpisodeId(episode._id)}>
@@ -134,7 +140,7 @@ export const ListOfEpisode = ({ movie }) => {
                                                 <DeleteIcon size={20} tw="text-danger" />
                                             </div>
                                             <TextCustom tw="!text-danger text-xs hidden md:block">
-                                                Delete
+                                                Xoá
                                             </TextCustom>
                                         </UnstyledButton>
                                     </Container>
