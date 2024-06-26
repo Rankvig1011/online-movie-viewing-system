@@ -9,4 +9,7 @@ export class MovieService extends GenaralService {
     async patchUpdateView(movieId) {
         return await axiosClient.patch(`movie/view/${movieId}`);
     }
+    async getMovieForName(data) {
+        return await axiosClient.post(`movie/search/name`, data);
+    }
 }

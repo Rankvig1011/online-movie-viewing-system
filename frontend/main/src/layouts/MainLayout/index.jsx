@@ -8,11 +8,11 @@ const defaultTheme = createTheme();
 export const MainLayout = () => {
     const token = localStorage.getItem('access_token');
     if (!token) {
-        const role = localStorage.getItem('role');
-        if (role === 'admin') {
-            return <Navigate to="/admin/dashboard" />;
-        }
         return <Navigate to="/auth/login" />;
+    }
+    const role = localStorage.getItem('role');
+    if (role === 'admin') {
+        return <Navigate to="/admin/dashboard" />;
     }
     return (
         <ThemeProvider theme={defaultTheme}>

@@ -1,10 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import { Container } from '@mui/material';
+import { Box, Container, IconButton, Paper, TextField, Tooltip } from '@mui/material';
 import VideoCard from '../../../../components/Movie/VideoCard';
-import { useMovie } from '@/hooks/movie';
-const Results = (props) => {
+import { useMovie, useSearchNameMovie } from '@/hooks/movie';
+import SearchIcon from '@mui/icons-material/Search';
+import ImageIcon from '@mui/icons-material/Image';
+import Navbar from './Navbar';
+import { useCategory } from '@/hooks/category';
+import Loading from '@/components/Loading';
+import ResponsiveDialog from './DialogImg';
+const Results = () => {
     const { movies } = useMovie();
-    const { category } = props;
+    const { dataSearchMovie, searchView } = useSearchNameMovie();
+    const { categories } = useCategory();
+    const [open, setOpen] = useState(false);
+    const [query, setQuery] = useState(false);
+    const [isImgActor, setImg] = useState(null);
+    const [category, setCategory] = useState('');
+    const [loading, setLoading] = useState(false);
     const [isArrMovies, setNewArrMovies] = useState([]);
     useEffect(() => {
         if (category) {
@@ -14,21 +26,126 @@ const Results = (props) => {
             setNewArrMovies(movies);
         }
     }, [category, movies]);
+    useEffect(() => {
+        if (query && dataSearchMovie) {
+            setNewArrMovies(dataSearchMovie);
+        }
+    }, [dataSearchMovie, query]);
+    const handleChangeCategory = (id) => {
+        setCategory(id);
+    };
+    const handleSearch = (event) => {
+        setLoading(true);
+        event.preventDefault();
+        const data = new FormData(event.currentTarget);
+        const newPayloadLogin = {
+            nameMovie: data.get('nameMovie'),
+        };
+        setQuery(newPayloadLogin);
+        searchView(newPayloadLogin);
+        setLoading(false);
+    };
+    const handleSearchByImg = () => {
+        if (isImgActor) {
+            console.log('isImgActor::', isImgActor);
+        }
+    };
+    const openSearchByImg = () => {
+        handleClickOpen();
+    };
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
     return (
-        <Container
-            maxWidth="xl"
-            sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                flexWrap: 'wrap',
-                gap: 3,
-                justifyContent: 'center',
-                alignItems: 'center',
-            }}
-        >
-            {isArrMovies.map((movie) => (
-                <VideoCard key={movie._id} movie={movie} />
-            ))}
+        <Container maxWidth="xl">
+            {loading && <Loading />}
+            <Box
+                component={Paper}
+                maxWidth="xl"
+                sx={{
+                    overflowX: 'auto',
+                    backgroundColor: '#f5f5f5',
+                    borderBottom: '1px solid #e0e0e0',
+                    borderRadius: '10px',
+                    mt: 1,
+                    padding: '10px 20px',
+                    display: 'flex',
+                    justifyContent: 'left',
+                    alignContent: 'center',
+                }}
+            >
+                <Box
+                    component="form"
+                    sx={{
+                        display: 'flex',
+                        justifyContent: 'left',
+                        alignContent: 'center',
+                    }}
+                    onSubmit={handleSearch}
+                >
+                    <TextField
+                        id="nameMovie"
+                        label="Tìm kiếm phim ..."
+                        variant="standard"
+                        name="nameMovie"
+                    />
+                    <Tooltip title="Tìm kiếm bằng tên phim">
+                        <IconButton
+                            type="submit"
+                            sx={{
+                                width: '50px',
+                                height: '50px',
+                            }}
+                        >
+                            <SearchIcon />
+                        </IconButton>
+                    </Tooltip>
+                </Box>
+                <Box sx={{ mx: 1 }}>
+                    <Tooltip title="Tìm kiếm bằng hình ảnh">
+                        <IconButton
+                            sx={{
+                                width: '50px',
+                                height: '50px',
+                            }}
+                            onClick={openSearchByImg}
+                        >
+                            <ImageIcon />
+                        </IconButton>
+                    </Tooltip>
+                </Box>
+                <Navbar
+                    title="Chọn lọc"
+                    sections={categories}
+                    handleChangeCategory={handleChangeCategory}
+                />
+            </Box>
+            <Container
+                maxWidth="xl"
+                sx={{
+                    display: 'flex',
+                    flexDirection: 'row',
+                    flexWrap: 'wrap',
+                    gap: 3,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}
+            >
+                {isArrMovies.map((movie) => (
+                    <VideoCard key={movie._id} movie={movie} />
+                ))}
+            </Container>
+            <ResponsiveDialog
+                open={open}
+                handleClose={handleClose}
+                setImg={setImg}
+                isImgActor={isImgActor}
+                handleSearchByImg={handleSearchByImg}
+            />
         </Container>
     );
 };
