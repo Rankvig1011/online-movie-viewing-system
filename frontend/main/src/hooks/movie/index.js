@@ -229,3 +229,15 @@ export const useUpdateViewMovie = () => {
         isPending,
     };
 };
+export const useSearchNameMovie = () => {
+    const searchView = movieService.getMovieForName.bind(movieService);
+    const { data, mutate, isPending } = useMutation({
+        mutationFn: searchView,
+    });
+
+    return {
+        dataSearchMovie: data?.results || [],
+        searchView: mutate,
+        isPending,
+    };
+};
