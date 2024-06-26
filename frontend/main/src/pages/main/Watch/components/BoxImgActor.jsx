@@ -43,6 +43,45 @@ function BoxImgActor(props) {
         slidesToShow: screenType === 'MOBILE' ? 2 : 5,
         slidesToScroll: screenType === 'MOBILE' ? 2 : 5,
     };
+    const renderBoxImgActor = (item) => {
+        return (
+            <>
+                <Box
+                    style={{
+                        position: 'relative',
+                        width: '350px',
+                        overflow: 'hidden',
+                        backgroundSize: 'cover',
+                        backgroundPosition: 'center',
+                    }}
+                >
+                    <img
+                        src={item?.srcImg}
+                        style={{
+                            margin: '10px',
+                            width: '250px',
+                            height: '350px',
+                            objectFit: 'cover',
+                            verticalAlign: 'bottom',
+                            borderRadius: '10px',
+                        }}
+                        className="bg-image-container"
+                    />
+                    <div
+                        style={{
+                            position: 'absolute',
+                            left: '20px',
+                            bottom: '20px',
+                            fontSize: '20px',
+                            color: 'white',
+                        }}
+                    >
+                        {item?.name}
+                    </div>
+                </Box>
+            </>
+        );
+    };
     return (
         <>
             {isImgActor?.length > 0 ? (
@@ -76,46 +115,16 @@ function BoxImgActor(props) {
                                     <KeyboardArrowLeftIcon style={{ fontSize: 30 }} />
                                 </div>
                             )}
-                            {movieData?.actors?.length && (
+                            {movieData?.actors?.length && isImgActor?.length > 4 ? (
                                 <Slider {...settings} ref={sliderRef}>
-                                    {isImgActor?.map((item) => (
-                                        <>
-                                            <Box
-                                                style={{
-                                                    position: 'relative',
-                                                    width: '100%',
-                                                    overflow: 'hidden',
-                                                    backgroundSize: 'cover',
-                                                    backgroundPosition: 'center',
-                                                }}
-                                            >
-                                                <img
-                                                    src={item?.srcImg}
-                                                    style={{
-                                                        margin: '10px',
-                                                        width: '250px',
-                                                        height: '350px',
-                                                        objectFit: 'cover',
-                                                        verticalAlign: 'bottom',
-                                                        borderRadius: '10px',
-                                                    }}
-                                                    className="bg-image-container"
-                                                />
-                                                <div
-                                                    style={{
-                                                        position: 'absolute',
-                                                        left: '20px',
-                                                        bottom: '20px',
-                                                        fontSize: '20px',
-                                                        color: 'white',
-                                                    }}
-                                                >
-                                                    {item?.name}
-                                                </div>
-                                            </Box>
-                                        </>
-                                    ))}
+                                    {isImgActor?.map((item) => renderBoxImgActor(item))}
                                 </Slider>
+                            ) : (
+                                isImgActor?.length && (
+                                    <Box sx={{ display: 'flex', justifyContent: 'center' }}>
+                                        {isImgActor?.map((item) => renderBoxImgActor(item))}
+                                    </Box>
+                                )
                             )}
                             {screenType !== 'MOBILE' && (
                                 <div onClick={() => sliderRef.current.slickNext()} className="next">

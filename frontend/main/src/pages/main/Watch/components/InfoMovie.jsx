@@ -55,7 +55,8 @@ function InfoMovie(props) {
         if (!movieViewLocalParse?.includes(movieData?._id)) {
             let newArr = [];
             if (movieViewLocalParse?.length) {
-                newArr = movieViewLocalParse.push(movieData?._id);
+                newArr = movieViewLocalParse;
+                newArr.push(movieData?._id);
             } else {
                 newArr.push(movieData?._id);
             }

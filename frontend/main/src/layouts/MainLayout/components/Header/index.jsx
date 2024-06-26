@@ -166,7 +166,7 @@ export const Header = () => {
                         >
                             <Avatar
                                 alt="Remy Sharp"
-                                src={profileLocalParse?.imgUser || ''}
+                                src={profileLocalParse?.avatar || ''}
                                 sx={{ mr: 1 }}
                             />
                             {profileLocalParse.name}
