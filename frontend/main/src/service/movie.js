@@ -12,4 +12,8 @@ export class MovieService extends GenaralService {
     async getMovieForName(data) {
         return await axiosClient.post(`movie/search/name`, data);
     }
+
+    async getMovieForImage(data) {
+        return await axiosClient.post('movie/search/img', data);
+    }
 }

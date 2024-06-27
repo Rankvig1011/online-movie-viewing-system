@@ -89,6 +89,20 @@ class MovieService extends GeneralService {
         console.log('movie::', movie);
         return movie;
     }
+
+    async findByImageMovie(url) {
+        const respon = await axios.post('http://localhost:3201/api/search-image-url', { url });
+        const listData = respon.data?.data;
+        if (listData) {
+            const movies = await this.findByActors(listData.map((item) => item._label));
+            return {
+                actors: listData.map((item) => item._label),
+                movies,
+            };
+        }
+        console.log('listData', listData);
+        return null;
+    }
 }
 
 export default new MovieService();

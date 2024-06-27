@@ -6,9 +6,10 @@ import MailIcon from '@mui/icons-material/Mail';
 import { Avatar, Badge, TextField } from '@mui/material';
 import tw from 'twin.macro';
 import { routerList } from '@/router';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import DehazeIcon from '@mui/icons-material/Dehaze';
 import { useMobileScreen } from '@/hooks/views';
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const Wrapper = tw.div`h-[67px] w-full flex items-center  border-solid border-gray-100 border-2 border-t-0 border-l-0 border-r-0 justify-between px-4`;
 
@@ -17,6 +18,13 @@ export const Header = ({ toggleShowDrawer }) => {
     const isMobileScreen = useMobileScreen();
     const adminRouter = routerList.find((router) => router.path === '/admin');
     const [title, setTitle] = React.useState('Dashboard');
+    const navigate = useNavigate();
+
+    const handleClickLogout = () => {
+        localStorage.clear();
+        navigate('/auth/login');
+    };
+
     React.useEffect(() => {
         const currentRouter = adminRouter.children.find(
             (router) => router.path === location.pathname.replace('/admin/', '')
@@ -38,6 +46,7 @@ export const Header = ({ toggleShowDrawer }) => {
                     src="https://freenice.net/wp-content/uploads/2021/08/hinh-anh-avatar-dep.jpg"
                     alt="ok"
                 />
+                <LogoutIcon onClick={handleClickLogout} titleAccess="Đăng Xuất" />
             </Container>
         </Wrapper>
     );

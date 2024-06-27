@@ -64,7 +64,15 @@ export default function ResponsiveDialog(props) {
                         justifyContent: 'center',
                     }}
                 >
-                    {isImgActor && isImgActor?.name}
+                    {isImgActor && (
+                        <img
+                            src={URL.createObjectURL(isImgActor)}
+                            alt=""
+                            style={{
+                                maxHeight: '500px',
+                            }}
+                        />
+                    )}
                 </DialogContent>
                 <DialogActions>
                     <Button autoFocus onClick={handleSearchByImg}>

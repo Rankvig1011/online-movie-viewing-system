@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Container, IconButton, Paper, TextField, Tooltip } from '@mui/material';
 import VideoCard from '../../../../components/Movie/VideoCard';
-import { useMovie, useSearchNameMovie } from '@/hooks/movie';
+import { useMovie, useSearchImage, useSearchNameMovie } from '@/hooks/movie';
 import SearchIcon from '@mui/icons-material/Search';
 import ImageIcon from '@mui/icons-material/Image';
 import Navbar from './Navbar';
 import { useCategory } from '@/hooks/category';
 import Loading from '@/components/Loading';
 import ResponsiveDialog from './DialogImg';
+import { uploadImage } from '@/service/common';
 const Results = () => {
     const { movies } = useMovie();
     const { dataSearchMovie, searchView } = useSearchNameMovie();
+
+    const { dataSearchMovieByImage, getMovieForImage } = useSearchImage();
     const { categories } = useCategory();
     const [open, setOpen] = useState(false);
     const [query, setQuery] = useState(false);
@@ -18,6 +21,7 @@ const Results = () => {
     const [category, setCategory] = useState('');
     const [loading, setLoading] = useState(false);
     const [isArrMovies, setNewArrMovies] = useState([]);
+    const [actors, setActors] = useState([]);
     useEffect(() => {
         if (category) {
             const newArrMovies = movies.filter((movie) => movie.category._id === category);
@@ -31,6 +35,16 @@ const Results = () => {
             setNewArrMovies(dataSearchMovie);
         }
     }, [dataSearchMovie, query]);
+
+    useEffect(() => {
+        if (isImgActor && dataSearchMovieByImage) {
+            const { actors, movies } = dataSearchMovieByImage;
+            setNewArrMovies(movies);
+            setActors(actors);
+            handleClose();
+        }
+    }, [dataSearchMovieByImage, isImgActor]);
+
     const handleChangeCategory = (id) => {
         setCategory(id);
     };
@@ -45,9 +59,10 @@ const Results = () => {
         searchView(newPayloadLogin);
         setLoading(false);
     };
-    const handleSearchByImg = () => {
+    const handleSearchByImg = async () => {
         if (isImgActor) {
-            console.log('isImgActor::', isImgActor);
+            const dataImage = await uploadImage([isImgActor], 'search');
+            getMovieForImage({ url: dataImage?.secure_url });
         }
     };
     const openSearchByImg = () => {
@@ -124,6 +139,18 @@ const Results = () => {
                     handleChangeCategory={handleChangeCategory}
                 />
             </Box>
+
+            {isImgActor && dataSearchMovieByImage && (
+                <Box
+                    sx={{
+                        mt: 4,
+                        fontSize: '20px',
+                        fontWeight: 'bold',
+                    }}
+                >
+                    Kết quả dự đoán : {actors.join(', ')}
+                </Box>
+            )}
             <Container
                 maxWidth="xl"
                 sx={{

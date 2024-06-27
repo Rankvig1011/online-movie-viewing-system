@@ -241,3 +241,16 @@ export const useSearchNameMovie = () => {
         isPending,
     };
 };
+
+export const useSearchImage = () => {
+    const getMovieForImage = movieService.getMovieForImage.bind(movieService);
+    const { data, mutate, isPending } = useMutation({
+        mutationFn: getMovieForImage,
+    });
+
+    return {
+        dataSearchMovieByImage: data?.results,
+        getMovieForImage: mutate,
+        isPending,
+    };
+};

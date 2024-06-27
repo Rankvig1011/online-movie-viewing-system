@@ -11,6 +11,7 @@ router.get('/:id', movieController.findById);
 
 router.post('/search/actors', movieController.findByActors);
 router.post('/search/name', movieController.findByNameMovie);
+router.post('/search/img', movieController.findByImageMovie);
 router.post('/', movieController.create);
 router.patch('/view/:id', movieController.updateView);
 router.patch('/:id', movieController.update);
