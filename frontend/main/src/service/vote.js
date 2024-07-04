@@ -9,4 +9,7 @@ export class voteService extends GenaralService {
     async getVoteByMovieId(movieId) {
         return await axiosClient.get(`/vote?movie=${movieId}`);
     }
+    async getMovieFavoritesId(idUser) {
+        return await axiosClient.get(`/vote/user/${idUser}`);
+    }
 }

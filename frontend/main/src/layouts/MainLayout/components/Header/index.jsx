@@ -131,12 +131,14 @@ export const Header = () => {
                                 </Link>
                             </MenuItem>
                             <MenuItem
-                                onClick={() => scrollToSection('Thông tin')}
+                                onClick={() => scrollToSection('Danh sách phim yêu thích')}
                                 sx={{ py: '6px', px: '12px' }}
                             >
-                                <Typography variant="body2" color="text.primary">
-                                    Thông tin
-                                </Typography>
+                                <Link to={`/favorites`}>
+                                    <Typography variant="body2" color="text.primary">
+                                        Phim yêu thích
+                                    </Typography>
+                                </Link>
                             </MenuItem>
                             {/* <MenuItem
                                 onClick={() => scrollToSection('faq')}
@@ -223,8 +225,10 @@ export const Header = () => {
                                 <MenuItem onClick={() => scrollToSection('Thể loại')}>
                                     <Link to={`/category`}>Thể loại</Link>
                                 </MenuItem>
-                                <MenuItem onClick={() => scrollToSection('Thông tin')}>
-                                    Thông tin
+                                <MenuItem
+                                    onClick={() => scrollToSection('Danh sách phim yêu thích')}
+                                >
+                                    <Link to={`/favorites`}>Phim yêu thích</Link>
                                 </MenuItem>
                                 {/* <MenuItem onClick={() => scrollToSection('faq')}>FAQ</MenuItem> */}
                                 <Divider />
@@ -250,9 +254,9 @@ export const Header = () => {
                                         onClose={handleClickCloseOption}
                                         TransitionComponent={Fade}
                                     >
-                                        <MenuItem onClick={handleClickCloseOption}>
+                                        {/* <MenuItem onClick={handleClickCloseOption}>
                                             Thông tin
-                                        </MenuItem>
+                                        </MenuItem> */}
                                         <MenuItem onClick={handleClickLogout}>Đăng xuất</MenuItem>
                                     </Menu>
                                 </MenuItem>

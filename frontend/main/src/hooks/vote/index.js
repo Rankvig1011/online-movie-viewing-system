@@ -95,3 +95,17 @@ export const useDeleteVote = () => {
         isPending: isPending,
     };
 };
+const getMovieFavorites = voteService.getMovieFavoritesId.bind(voteService);
+export const useMovieFavorites = (idUser) => {
+    const { data, isPending, error } = useQuery({
+        queryKey: ['/vote/', idUser],
+        queryFn: async () => {
+            return getMovieFavorites(idUser);
+        },
+    });
+    return {
+        movieFavorites: data?.results || [],
+        isLoading: isPending,
+        isError: error,
+    };
+};
