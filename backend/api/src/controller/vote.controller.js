@@ -43,7 +43,7 @@ class VoteController extends GeneralController {
     }
     async findVoteByUserId(req, res) {
         try {
-            const { userId } = req.query;
+            const { userId } = req.params;
             const votes = await voteService.findVoteByUserId(userId);
             ResponseApp.ok(res, votes);
         } catch (error) {

@@ -12,9 +12,9 @@ class VoteService extends GeneralService {
             .populate('user', ['name', 'avatar'])
             .populate('movie', ['name', 'isVip']);
     }
-    async findVoteByUserId(user) {
+    async findVoteByUserId(userId) {
         return await voteModel
-            .find({ user })
+            .find({ user: userId })
             .populate('user', ['name', 'avatar'])
             .populate('movie');
     }
