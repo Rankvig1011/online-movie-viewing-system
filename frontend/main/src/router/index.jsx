@@ -15,6 +15,7 @@ import { Dashboard } from '@/pages/admin/Dashboard';
 import { Actor } from '@/pages/admin/Actor';
 import { CategoryAdminPage } from '@/pages/admin/Category';
 import { MovieAdminPage } from '@/pages/admin/Movie';
+import Favorites from '@/pages/main/Favorites';
 
 export const routerList = [
     {
@@ -77,6 +78,10 @@ export const routerList = [
             {
                 path: '/profile',
                 element: <Profile />,
+            },
+            {
+                path: '/favorites',
+                element: <Favorites />,
             },
         ],
     },
