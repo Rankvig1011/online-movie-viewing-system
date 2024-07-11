@@ -14,18 +14,12 @@ const Reply = new Schema({
     updatedAt: { type: Date },
 });
 
-const Interaction = new Schema({
-    user: { type: Schema.Types.ObjectId, ref: 'User' },
-    type: { type: String },
-});
-
 const Comment = new Schema(
     {
         content: { type: String, required: true },
         user: { type: Schema.Types.ObjectId, ref: 'User' },
         movie: { type: Schema.Types.ObjectId, ref: 'Movie' },
         status: { type: Boolean, default: true },
-        interaction: { type: Interaction },
         reply: [{ type: Reply }],
     },
     { timestamps: true }
