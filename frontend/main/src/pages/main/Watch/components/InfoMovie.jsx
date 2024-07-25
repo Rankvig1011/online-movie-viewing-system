@@ -27,9 +27,9 @@ function InfoMovie(props) {
     const movieViewLocal = localStorage.getItem('movieView');
     const movieViewLocalParse = JSON.parse(movieViewLocal);
     const handleVoteMovie = () => {
-        if (!useVote?.includes(profileLocalParse._id)) {
+        if (!useVote?.includes(profileLocalParse?._id)) {
             const payload = {
-                user: profileLocalParse._id,
+                user: profileLocalParse?._id,
                 movie: movieData?._id,
                 vote: 0,
             };
@@ -66,19 +66,21 @@ function InfoMovie(props) {
         handleEpisode();
     };
     useEffect(() => {
-        if (voteData?.length) {
-            const newArr = voteData?.map((item) => {
-                if (item?.user == profileLocalParse._id) {
-                    SetUseVoteId(item);
-                }
-                return item?.user;
-            });
-            setUseVote(newArr);
-        } else {
-            SetUseVoteId(null);
-            setUseVote([]);
+        if (profileLocalParse?._id) {
+            if (voteData?.length) {
+                const newArr = voteData?.map((item) => {
+                    if (item?.user == profileLocalParse?._id) {
+                        SetUseVoteId(item);
+                    }
+                    return item?.user;
+                });
+                setUseVote(newArr);
+            } else {
+                SetUseVoteId(null);
+                setUseVote([]);
+            }
         }
-    }, [profileLocalParse._id, voteData]);
+    }, [profileLocalParse?._id, voteData]);
     return (
         <>
             <Grid container spacing={2} sx={{ py: 3, px: 3 }}>
@@ -139,7 +141,9 @@ function InfoMovie(props) {
                                         type="submit"
                                         size="large"
                                         color="secondary"
-                                        onClick={handleUnderVoteMovie}
+                                        onClick={
+                                            profileLocalParse?._id ? handleUnderVoteMovie : () => {}
+                                        }
                                     >
                                         <ThumbUpIcon />
                                     </IconButton>
@@ -150,7 +154,9 @@ function InfoMovie(props) {
                                         type="submit"
                                         size="large"
                                         // color="secondary"
-                                        onClick={handleVoteMovie}
+                                        onClick={
+                                            profileLocalParse?._id ? handleVoteMovie : () => {}
+                                        }
                                     >
                                         <ThumbUpOffAltIcon />
                                     </IconButton>

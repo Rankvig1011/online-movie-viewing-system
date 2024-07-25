@@ -26,7 +26,7 @@ const Favorites = () => {
                     }}
                 >
                     {isArrMovies.map((movie) => (
-                        <VideoCard key={movie._id} movie={movie} />
+                        <VideoCard key={movie._id} movie={movie.movie} />
                     ))}
                 </Container>
             </main>

@@ -130,16 +130,18 @@ export const Header = () => {
                                     </Typography>
                                 </Link>
                             </MenuItem>
-                            <MenuItem
-                                onClick={() => scrollToSection('Danh sách phim yêu thích')}
-                                sx={{ py: '6px', px: '12px' }}
-                            >
-                                <Link to={`/favorites`}>
-                                    <Typography variant="body2" color="text.primary">
-                                        Phim yêu thích
-                                    </Typography>
-                                </Link>
-                            </MenuItem>
+                            {profileLocalParse?._id && (
+                                <MenuItem
+                                    onClick={() => scrollToSection('Danh sách phim yêu thích')}
+                                    sx={{ py: '6px', px: '12px' }}
+                                >
+                                    <Link to={`/favorites`}>
+                                        <Typography variant="body2" color="text.primary">
+                                            Phim yêu thích
+                                        </Typography>
+                                    </Link>
+                                </MenuItem>
+                            )}
                             {/* <MenuItem
                                 onClick={() => scrollToSection('faq')}
                                 sx={{ py: '6px', px: '12px' }}
@@ -164,14 +166,18 @@ export const Header = () => {
                             size="small"
                             component="a"
                             target="_blank"
-                            onClick={handleClickOpenOption}
+                            onClick={
+                                profileLocalParse?.name
+                                    ? handleClickOpenOption
+                                    : () => navigate('/auth/login')
+                            }
                         >
                             <Avatar
                                 alt="Remy Sharp"
                                 src={profileLocalParse?.avatar || ''}
                                 sx={{ mr: 1 }}
                             />
-                            {profileLocalParse.name}
+                            {profileLocalParse?.name || 'Đăng nhập'}
                         </Button>
                         <Menu
                             id="fade-menu"
@@ -240,7 +246,7 @@ export const Header = () => {
                                         sx={{ width: '100%' }}
                                         onClick={handleClickOpenOption}
                                     >
-                                        {profileLocalParse.name}
+                                        {profileLocalParse?.name}
                                     </Button>
                                 </MenuItem>
                                 <MenuItem>

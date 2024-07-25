@@ -47,7 +47,7 @@ function Comment(props) {
         const newPayloadLogin = {
             movie: idMovie,
             content: data.get('commentInfo'),
-            user: profileLocalParse._id,
+            user: profileLocalParse?._id,
             createdAt: new Date(),
             updatedAt: new Date(),
         };
@@ -78,43 +78,45 @@ function Comment(props) {
                 >
                     Bình luận
                 </Typography>
-                <Paper
-                    style={{
-                        padding: '10px 25px 10px 10px',
-                        marginTop: '15px',
-                    }}
-                >
-                    <Box
-                        sx={{
-                            '& .MuiTextField-root': { m: 1, width: '100%' },
+                {profileLocalParse?._id && (
+                    <Paper
+                        style={{
+                            padding: '10px 25px 10px 10px',
+                            marginTop: '15px',
                         }}
-                        noValidate
-                        autoComplete="off"
-                        component="form"
-                        onSubmit={handleComment}
                     >
-                        <TextField
-                            id="outlined-multiline-static"
-                            label="Bình luận của bạn"
-                            multiline
-                            name="commentInfo"
-                            autoFocus
-                            autoComplete="commentInfo"
-                            rows={4}
-                            // defaultValue="Default Value"
-                        />
                         <Box
                             sx={{
-                                display: 'flex',
-                                justifyContent: 'end',
+                                '& .MuiTextField-root': { m: 1, width: '100%' },
                             }}
+                            noValidate
+                            autoComplete="off"
+                            component="form"
+                            onSubmit={handleComment}
                         >
-                            <Button variant="outlined" type="submit">
-                                Bình luận
-                            </Button>
+                            <TextField
+                                id="outlined-multiline-static"
+                                label="Bình luận của bạn"
+                                multiline
+                                name="commentInfo"
+                                autoFocus
+                                autoComplete="commentInfo"
+                                rows={4}
+                                // defaultValue="Default Value"
+                            />
+                            <Box
+                                sx={{
+                                    display: 'flex',
+                                    justifyContent: 'end',
+                                }}
+                            >
+                                <Button variant="outlined" type="submit">
+                                    Bình luận
+                                </Button>
+                            </Box>
                         </Box>
-                    </Box>
-                </Paper>
+                    </Paper>
+                )}
 
                 <Paper
                     style={{
@@ -154,16 +156,18 @@ function Comment(props) {
                                                 </p>
                                             </div>
                                             <Box>
-                                                <Tooltip title="Trả lời">
-                                                    <IconButton
-                                                        color="primary"
-                                                        onClick={() => {
-                                                            handleOpenReply(item._id);
-                                                        }}
-                                                    >
-                                                        <ReplyIcon />
-                                                    </IconButton>
-                                                </Tooltip>
+                                                {profileLocalParse?._id && (
+                                                    <Tooltip title="Trả lời">
+                                                        <IconButton
+                                                            color="primary"
+                                                            onClick={() => {
+                                                                handleOpenReply(item._id);
+                                                            }}
+                                                        >
+                                                            <ReplyIcon />
+                                                        </IconButton>
+                                                    </Tooltip>
+                                                )}
                                                 {item?.reply?.length ? (
                                                     <Tooltip title="Lượt trả lời">
                                                         <IconButton

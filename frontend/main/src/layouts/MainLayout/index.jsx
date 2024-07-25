@@ -6,10 +6,10 @@ import { Header } from './components/Header';
 import { Navigate } from 'react-router-dom';
 const defaultTheme = createTheme();
 export const MainLayout = () => {
-    const token = localStorage.getItem('access_token');
-    if (!token) {
-        return <Navigate to="/auth/login" />;
-    }
+    //const token = localStorage.getItem('access_token');
+    // if (!token) {
+    //     return <Navigate to="/auth/login" />;
+    // }
     const role = localStorage.getItem('role');
     if (role === 'admin') {
         return <Navigate to="/admin/dashboard" />;
